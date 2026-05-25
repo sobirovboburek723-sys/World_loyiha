@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dunyo Xaritasi</title>
+    
+    <!-- Leaflet CSS - Xarita kutubxonasi -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #05070a;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+            background: #05070a;
+        }
+
+        /* Ma'lumot paneli - Neon uslubida */
+        .info-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border-left: 4px solid #00f2ff;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            display: none; /* Bosilmaguncha yashirin */
+        }
+
+        .info-box h2 {
+            margin: 0;
+            color: #00f2ff;
+            text-transform: uppercase;
+            font-size: 22px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .region-tag {
+            display: inline-block;
+            background: rgba(0, 242, 255, 0.1);
+            color: #00f2ff;
+            padding: 4px 10px;
+            margin: 3px;
+            border-radius: 5px;
+            font-size: 12px;
+            border: 3px solid rgb(0, 238, 255);
+        }
+
+        /* Xaritadagi davlatlar ustiga borganda effekt */
+        .leaflet-interactive:hover {
+            fill-opacity: 0.8;
+            stroke: #02e1ff;
+            stroke-width: 4;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div class="info-box" id="infoBox">
+        <h2 id="countryName">Davlat nomi</h2>
+        <hr style="border: 0.5px solid #333; margin: 15px 0;">
+        <p><strong>Viloyatlar/Hududlar:</strong></p>
+        <div id="regionsList"></div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Xaritani yaratish va takrorlanishini cheklash
+        const map = L.map('map', {
+            center: [20, 0],
+            zoom: 2,
+            minZoom: 2,
+            worldCopyJump: false, // Dunyo xaritasi takrorlanib sakrab ketmasligi uchun
+            maxBounds: [[-90, -180], [90, 180]]
+        });
+
+        // Siyosiy xarita qatlamini qo'shish (noWrap: true qo'shildi)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            noWrap: true // Xaritani gorizantaliga 4 marta takrorlanishini oldini oladi
+        }).addTo(map);
+
+        // Ba'zi davlatlar ma'lumotlari
+        const countryData = {
+          "Afghanistan": ["Kabul", "Kandahar", "Herat", "Balkh", "Nangarhar"],
+          "Albania": ["Tirana", "Durres", "Vlore", "Shkoder", "Elbasan"],
+          "Algeria": ["Algiers", "Oran", "Constantine", "Annaba", "Blida"],
+          "Argentina": ["Buenos Aires", "Cordoba", "Santa Fe", "Mendoza", "Tucuman"],
+          "Australia": ["New South Wales", "Victoria", "Queensland", "Tasmania", "Western Australia"],
+          "Austria": ["Vienna", "Salzburg", "Tyrol", "Styria", "Carinthia"],
+          "Azerbaijan": ["Baku", "Ganja", "Sumqayit", "Lankaran", "Shaki"],
+          "Bangladesh": ["Dhaka", "Chittagong", "Khulna", "Rajshahi", "Sylhet"],
+          "Belarus": ["Minsk", "Gomel", "Brest", "Vitebsk", "Grodno"],
+          "Belgium": ["Brussels", "Flanders", "Wallonia", "Antwerp", "Liege"],
+          "Brazil": ["Sao Paulo", "Rio de Janeiro", "Bahia", "Parana", "Amazonas"],
+          "Bulgaria": ["Sofia", "Plovdiv", "Varna", "Burgas", "Ruse"],
+          "Canada": ["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba"],
+          "China": ["Beijing", "Shanghai", "Guangdong", "Sichuan", "Xinjiang"],
+          "Colombia": ["Bogota", "Antioquia", "Valle del Cauca", "Santander", "Bolivar"],
+          "Croatia": ["Zagreb", "Split", "Rijeka", "Osijek", "Dubrovnik"],
+          "Czech Republic": ["Prague", "Brno", "Ostrava", "Plzen", "Liberec"],
+          "Denmark": ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
+          "Egypt": ["Cairo", "Alexandria", "Giza", "Luxor", "Aswan"],
+          "Estonia": ["Tallinn", "Tartu", "Narva", "Parnu", "Viljandi"],
+          "Finland": ["Helsinki", "Espoo", "Tampere", "Turku", "Oulu"],
+          "France": ["Paris", "Lyon", "Marseille", "Toulouse", "Nice"],
+          "Germany": ["Bavaria", "Berlin", "Hamburg", "Saxony", "Hesse"],
+          "Greece": ["Athens", "Thessaloniki", "Crete", "Patras", "Larissa"],
+          "Hungary": ["Budapest", "Debrecen", "Szeged", "Miskolc", "Pecs"],
+          "India": ["Maharashtra", "Delhi", "Karnataka", "Tamil Nadu", "Gujarat"],
+          "Indonesia": ["Jakarta", "Bali", "West Java", "Sumatra", "Sulawesi"],
+          "Iran": ["Tehran", "Isfahan", "Shiraz", "Tabriz", "Mashhad"],
+          "Iraq": ["Baghdad", "Basra", "Mosul", "Erbil", "Najaf"],
+          "Ireland": ["Dublin", "Cork", "Galway", "Limerick", "Waterford"],
+          "Israel": ["Jerusalem", "Tel Aviv", "Haifa", "Nazareth", "Beersheba"],
+          "Italy": ["Rome", "Milan", "Naples", "Sicily", "Venice"],
+          "Japan": ["Tokyo", "Osaka", "Kyoto", "Hokkaido", "Fukuoka"],
+          "Kazakhstan": ["Astana", "Almaty", "Shymkent", "Aktobe", "Karaganda"],
+          "Kyrgyzstan": ["Bishkek", "Osh", "Jalal-Abad", "Naryn", "Talas"],
+          "Malaysia": ["Kuala Lumpur", "Selangor", "Sabah", "Sarawak", "Penang"],
+          "Mexico": ["Mexico City", "Jalisco", "Nuevo Leon", "Puebla", "Yucatan"],
+          "Mongolia": ["Ulaanbaatar", "Darkhan", "Erdenet", "Khovd", "Sukhbaatar"],
+          "Netherlands": ["Amsterdam", "Rotterdam", "Utrecht", "Eindhoven", "Groningen"],
+          "New Zealand": ["Auckland", "Wellington", "Canterbury", "Otago", "Waikato"],
+          "Norway": ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromso"],
+          "Pakistan": ["Punjab", "Sindh", "Balochistan", "Khyber Pakhtunkhwa", "Islamabad"],
+          "Poland": ["Warsaw", "Krakow", "Lodz", "Wroclaw", "Poznan"],
+          "Portugal": ["Lisbon", "Porto", "Braga", "Coimbra", "Faro"],
+          "Romania": ["Bucharest", "Cluj", "Timisoara", "Iasi", "Constanta"],
+          "Russia": ["Moscow", "Saint Petersburg", "Siberia", "Tatarstan", "Chechnya"],
+          "Saudi Arabia": ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam"],
+          "South Africa": ["Gauteng", "Cape Town", "Durban", "Pretoria", "Johannesburg"],
+          "South Korea": ["Seoul", "Busan", "Incheon", "Daegu", "Jeju"],
+          "Spain": ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao"],
+          "Sweden": ["Stockholm", "Gothenburg", "Malmo", "Uppsala", "Kiruna"],
+          "Switzerland": ["Zurich", "Geneva", "Bern", "Basel", "Lausanne"],
+          "Tajikistan": ["Dushanbe", "Khujand", "Kulob", "Bokhtar", "Panjakent"],
+          "Thailand": ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Khon Kaen"],
+          "Turkey": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya"],
+          "Turkmenistan": ["Ashgabat", "Turkmenabat", "Dashoguz", "Mary", "Balkanabat"],
+          "Ukraine": ["Kyiv", "Kharkiv", "Odessa", "Lviv", "Dnipro"],
+          "United Kingdom": ["England", "Scotland", "Wales", "Northern Ireland", "London"],
+          "United States": ["California", "Texas", "Florida", "New York", "Illinois"],
+          "Uzbekistan": ["Andijon", "Buxoro", "Jizzax", "Namangan", "Navoiy", "Qashqadaryo", "Samarqand", "Sirdaryo", "Surxondaryo", "Toshkent", "Xorazm", ],
+          "Venezuela": ["Caracas", "Maracaibo", "Valencia", "Barquisimeto", "Merida"],
+          "Helvetica": ["Hanoi", "Ho Chi Minh City", "Da Nang", "Hue", "Can Tho"],
+          "Ecuador": ["Quito", "Guayaquil", "Cuenca", "Santo Domingo", "Machala"],
+          "Gambia": ["Banjul", "Serekunda", "Brikama", "Farafenni", "Bakau"],
+          "Guinea": ["Conakry", "Nzerekore", "Kankan", "Kindia", "Labe"],
+          "Guinea-Bissau": ["Bissau", "Bafata", "Gabu", "Bissora", "Bolama"],
+          "Paraguay": ["Asuncion", "Ciudad del Este", "San Lorenzo", "Luque", "Encarnacion"],
+          "Peru": ["Lima", "Cusco", "Arequipa", "Trujillo", "Iquitos"],
+          "Senegal": ["Dakar", "Thies", "Kaolack", "Ziguinchor", "Saint-Louis"],
+          "Sierra Leone": ["Freetown", "Bo", "Kenema", "Makeni", "Koidu"],
+          "Uruguay": ["Montevideo", "Salto", "Ciudad de la Costa", "Paysandu", "Maldonado"],
+          "Angola": ["Luanda", "Huambo", "Lobito", "Benguela", "Lubango"],
+          "Armenia": ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Hrazdan"],
+          "Bahamas": ["Nassau", "Freeport", "West End", "Coopers Town", "Marsh Harbour"],
+          "Bahrain": ["Manama", "Riffa", "Muharraq", "Hamad Town", "Aali"],
+          "Bolivia": ["Sucre", "La Paz", "Santa Cruz", "Cochabamba", "Potosi"],
+          "Cameroon": ["Yaounde", "Douala", "Garoua", "Bamenda", "Maroua"],
+          "Central African Republic": ["Bangui", "Bimbo", "Berberati", "Carnot", "Bambari"],
+          "Chad": ["N'Djamena", "Moundou", "Sarh", "Abeche", "Kelo"],
+          "Chile": ["Santiago", "Valparaiso", "Concepcion", "Antofagasta", "Valdivia"],
+          "Congo": ["Brazzaville", "Pointe-Noire", "Dolisie", "Nkayi", "Impfondo"],
+          "Costa Rica": ["San Jose", "Alajuela", "Cartago", "Heredia", "Liberia"],
+          "Cuba": ["Havana", "Santiago de Cuba", "Camaguey", "Holguin", "Guantanamo"],
+          "Cyprus": ["Nicosia", "Limassol", "Larnaca", "Paphos", "Kyrenia"],
+          "Democratic Republic of the Congo": ["Kinshasa", "Lubumbashi", "Mbuji-Mayi", "Kisangani", "Goma"],
+          "Dominican Republic": ["Santo Domingo", "Santiago", "La Romana", "San Pedro", "Puerto Plata"],
+          "El Salvador": ["San Salvador", "Santa Ana", "San Miguel", "Mejicanos", "Santa Tecla"],
+          "Ethiopia": ["Addis Ababa", "Gondar", "Mekele", "Awasa", "Bahir Dar"],
+          "Georgia": ["Tbilisi", "Kutaisi", "Batumi", "Rustavi", "Zugdidi"],
+          "Ghana": ["Accra", "Kumasi", "Tamale", "Takoradi", "Ashaiman"],
+          "Guatemala": ["Guatemala City", "Mixco", "Villa Nueva", "Quetzaltenango", "Escuintla"],
+          "Honduras": ["Tegucigalpa", "San Pedro Sula", "Choloma", "La Ceiba", "El Progreso"],
+          "Iceland": ["Reykjavik", "Kopavogur", "Hafnarfjordur", "Akureyri", "Reykjanesbaer"],
+          "Ivory Coast": ["Yamoussoukro", "Abidjan", "Bouake", "Daloa", "San-Pedro"],
+          "Jamaica": ["Kingston", "New Kingston", "Spanish Town", "Portmore", "Montego Bay"],
+          "Jordan": ["Amman", "Zarqa", "Irbid", "Aqaba", "Jerash"],
+          "Kenya": ["Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret"],
+          "Kuwait": ["Kuwait City", "Dasman", "Sharq", "Mirgab", "Jibla"],
+          "Latvia": ["Riga", "Daugavpils", "Liepaja", "Jelgava", "Jurmala"],
+          "Lebanon": ["Beirut", "Tripoli", "Sidon", "Tyre", "Byblos"],
+          "Libya": ["Tripoli", "Benghazi", "Misrata", "Tarhuna", "Al Khums"],
+          "Lithuania": ["Vilnius", "Kaunas", "Klaipeda", "Siauliai", "Panevezys"],
+          "Luxembourg": ["Luxembourg City", "Esch-sur-Alzette", "Differdange", "Dudelange", "Ettelbruck"],
+          "Madagascar": ["Antananarivo", "Toamasina", "Antsirabe", "Mahajanga", "Fianarantsoa"],
+          "Mali": ["Bamako", "Sikasso", "Mopti", "Koutiala", "Kayes"],
+          "Malta": ["Valletta", "Birkirkara", "Qormi", "Sliema", "Mosta"],
+          "Moldova": ["Chisinau", "Balti", "Tiraspol", "Bender", "Kahul"],
+          "Montenegro": ["Podgorica", "Niksic", "Pljevlja", "Bijelo Polje", "Cetinje"],
+          "Morocco": ["Rabat", "Casablanca", "Marrakesh", "Fes", "Tangier"],
+          "Mozambique": ["Maputo", "Matola", "Beira", "Nampula", "Chimoio"],
+          "Nicaragua": ["Managua", "Leon", "Masaya", "Matagalpa", "Chinandega"],
+          "Niger": ["Niamey", "Zinder", "Maradi", "Tahoua", "Agadez"],
+          "Nigeria": ["Abuja", "Lagos", "Kano", "Ibadan", "Kaduna"],
+          "North Macedonia": ["Skopje", "Bitola", "Kumanovo", "Prilep", "Tetovo"],
+          "Oman": ["Muscat", "Salalah", "Seeb", "Sohar", "Nizwa"],
+          "Panama": ["Panama City", "San Miguelito", "Tocumen", "David", "Colon"],
+          "Philippines": ["Manila", "Quezon City", "Davao City", "Cebu City", "Zamboanga"],
+          "Qatar": ["Doha", "Al Rayyan", "Al Wakrah", "Al Khor", "Umm Salal"],
+          "Singapore": ["Central Region", "East Region", "North Region", "North-East Region", "West Region"],
+          "Slovakia": ["Bratislava", "Kosice", "Presov", "Zilina", "Nitra"],
+          "Slovenia": ["Ljubljana", "Maribor", "Celje", "Kranj", "Velenje"],
+          "Somalia": ["Mogadishu", "Hargeisa", "Bosaso", "Galkayo", "Merca"],
+          "Sri Lanka": ["Colombo", "Kandy", "Galle", "Jaffna", "Negombo"],
+          "Sudan": ["Khartoum", "Omdurman", "Khartoum North", "Port Sudan", "Nyala"],
+          "Syria": ["Damascus", "Aleppo", "Homs", "Latakia", "Hama"],
+          "Tanzania": ["Dodoma", "Dar es Salaam", "Mwanza", "Arusha", "Mbeya"],
+          "Tunisia": ["Tunis", "Sfax", "Sousse", "Kairouan", "Bizerte"],
+          "Uganda": ["Kampala", "Nansana", "Kira", "Mbarara", "Mukono"],
+          "United Arab Emirates": ["Abu Dhabi", "Dubai", "Sharjah", "Ajman", "Al Ain"],
+          "Yemen": ["Sanaa", "Aden", "Taiz", "Al Hudaydah", "Mukalla"],
+          "Zambia": ["Lusaka", "Kitwe", "Ndola", "Kabwe", "Chingola"],
+          "Zimbabwe": ["Harare", "Bulawayo", "Chitungwiza", "Mutare", "Gweru"],
+          "Dem. Rep. Congo": ["Kinshasa", "Lubumbashi", "Mbuji-Mayi", "Kisangani", "Goma"],
+          "Greenland": ["Nuuk", "Sisimiut", "Ilulissat", "Qaqortoq", "Aasiaat"],
+          "Belize": ["Belmopan", "Belize City", "San Ignacio", "Orange Walk", "Dangriga"],
+          "Benin": ["Porto-Novo", "Cotonou", "Parakou", "Djougou", "Bohicon"],
+          "Togo": ["Lome", "Sokode", "Kara", "Atakpame", "Kpalime"],
+          "Botswana": ["Gaborone", "Francistown", "Molepolole", "Maun", "Serowe"],
+          "Central African Rep.": ["Bangui", "Bimbo", "Berberati", "Carnot", "Bambari"],
+           "Côte d'Ivoire": ["Yamoussoukro", "Abidjan", "Bouake", "Daloa", "San-Pedro"],
+          "Gabon": ["Libreville", "Port-Gentil", "Franceville", "Oyem", "Moanda"],
+          "Liberia": ["Monrovia", "Gbarnga", "Kakata", "Bensonville", "Harper"],
+          "Namibia": ["Windhoek", "Walvis Bay", "Swakopmund", "Henties Bay", "Oshakati"],
+          "Albania": ["Tirana", "Durres", "Vlore", "Shkoder", "Elbasan"],
+          "Andorra": ["Andorra la Vella", "Escaldes-Engordany", "Encamp", "Sant Julia de Loria", "La Massana"],
+          "Antigua and Barbuda": ["St. John's", "All Saints", "Liberta", "Potters Village", "Bolans"],
+          "Barbados": ["Bridgewater", "Speightstown", "Oistins", "Bathsheba", "Holetown"],
+          "Belize": ["Belmopan", "Belize City", "San Ignacio", "Orange Walk", "Dangriga"],
+          "Benin": ["Porto-Novo", "Cotonou", "Parakou", "Djougou", "Bohicon"],
+          "Bhutan": ["Thimphu", "Phuntsholing", "Paro", "Gelephu", "Punakha"],
+          "Bosnia and Herzegovina": ["Sarajevo", "Banja Luka", "Tuzla", "Zenica", "Mostar"],
+          "Brunei": ["Bandar Seri Begawan", "Kuala Belait", "Seria", "Tutong", "Bangar"],
+          "Burkina Faso": ["Ouagadougou", "Bobo-Dioulasso", "Koudougou", "Ouahigouya", "Banfora"],
+          "Burundi": ["Gitega", "Bujumbura", "Muyinga", "Ngozi", "Rumonge"],
+          "Cabo Verde": ["Praia", "Mindelo", "Santa Maria", "Assomada", "Porto Novo"],
+          "Cambodia": ["Phnom Penh", "Siem Reap", "Battambang", "Sihanoukville", "Poipet"],
+          "Comoros": ["Moroni", "Mutsamudu", "Fomboni", "Domoni", "Mirontsi"],
+          "Cuba": ["Havana", "Santiago de Cuba", "Camaguey", "Holguin", "Guantanamo"],
+          "Djibouti": ["Djibouti City", "Ali Sabieh", "Tadjoura", "Dikhil", "Obock"],
+          "Dominica": ["Roseau", "Portsmouth", "Marigot", "Berekua", "Mahaut"],
+          "Equatorial Guinea": ["Malabo", "Bata", "Ebebiyin", "Oyala", "Mongomo"],
+          "Eritrea": ["Asmara", "Keren", "Massawa", "Assab", "Mendefera"],
+          "Fiji": ["Suva", "Lautoka", "Nadi", "Labasa", "Ba"],
+          "Guyana": ["Georgetown", "Linden", "New Amsterdam", "Anna Regina", "Bartica"],
+          "Haiti": ["Port-au-Prince", "Carrefour", "Delmas", "Cap-Haitien", "Gonaives"],
+          "Kirim": ["Simferopol", "Sevastopol", "Kerch", "Yevpatoria", "Yalta"],
+          "Kosovo": ["Pristina", "Prizren", "Gjilan", "Peja", "Mitrovica"],
+          "Laos": ["Vientiane", "Pakse", "Savannakhet", "Luang Prabang", "Xam Neua"],
+          "Lesotho": ["Maseru", "Teyateyaneng", "Mafeteng", "Hlotse", "Mohale's Hoek"],
+          "Liechtenstein": ["Vaduz", "Schaan", "Triesen", "Balzers", "Eschen"],
+          "Madagascar": ["Antananarivo", "Toamasina", "Antsirabe", "Mahajanga", "Fianarantsoa"],
+          "Malawi": ["Lilongwe", "Blantyre", "Mzuzu", "Zomba", "Kasungu"],
+          "Maldives": ["Male", "Addu City", "Fuvahmulah", "Kulhudhuffushi", "Thinadhoo"],
+          "Mauritania": ["Nouakchott", "Nouadhibou", "Nema", "Kaedi", "Zouerat"],
+          "Mauritius": ["Port Louis", "Beau Bassin", "Vacoas", "Curepipe", "Quatre Bornes"],
+          "Micronesia": ["Palikir", "Weno", "Tol", "Kolonia", "Nett"],
+          "Monaco": ["Monaco Ville", "Monte Carlo", "La Condamine", "Fontvieille", "Moneghetti"],
+          "Myanmar": ["Naypyidaw", "Yangon", "Mandalay", "Mawlamyine", "Taunggyi"],
+          "Nauru": ["Yaren", "Denigomodu", "Meneng", "Aiwo", "Boe"],
+          "Nepal": ["Kathmandu", "Pokhara", "Lalitpur", "Bharatpur", "Biratnagar"],
+          "North Korea": ["Pyongyang", "Hamhung", "Chongjin", "Nampo", "Wonsan"],
+          "Palestine": ["Jerusalem", "Gaza City", "Ramallah", "Hebron", "Nablus"],
+          "Papua New Guinea": ["Port Moresby", "Lae", "Arawa", "Mount Hagen", "Madang"],
+          "Rwanda": ["Kigali", "Butare", "Gisenyi", "Gitarama", "Ruhengeri"],
+          "Saint Kitts and Nevis": ["Basseterre", "Charlestown", "Sadlers", "Cayon", "Sandy Point"],
+          "Saint Lucia": ["Castries", "Gros Islet", "Vieux Fort", "Soufriere", "Dennery"],
+          "Saint Vincent and the Grenadines": ["Kingstown", "Georgetown", "Byera", "Barrouallie", "Layou"],
+          "Samoa": ["Apia", "Vaitele", "Faleasiu", "Vailele", "Leulumoega"],
+          "San Marino": ["San Marino", "Serravalle", "Borgo Maggiore", "Domagnano", "Fiorentino"],
+          "Sao Tome and Principe": ["Sao Tome", "Trindade", "Neves", "Santana", "San Antonio"],
+          "Seychelles": ["Victoria", "Anse Etoile", "Beau Vallon", "Anse Royale", "Cascade"],
+          "Solomon Islands": ["Honiara", "Gizo", "Auki", "Noro", "Kirakira"],
+          "South Sudan": ["Juba", "Malakal", "Wau", "Yei", "Yambio"],
+          "Suriname": ["Paramaribo", "Lelydorp", "New Nickerie", "Moengo", "Nieuw Amsterdam"],
+          "Eswatini": ["Mbabane", "Manzini", "Lobamba", "Big Bend", "Siteki"],
+          "Taiwan": ["Taipei", "Kaohsiung", "Taichung", "Tainan", "Hsinchu"],
+          "Timor-Leste": ["Dili", "Dare", "Baucau", "Maliana", "Suai"],
+          "Togo": ["Lome", "Sokode", "Kara", "Atakpame", "Kpalime"],
+          "Tonga": ["Nuku'alofa", "Mu'a", "Neiafu", "Haveluloto", "Vaini"],
+          "Trinidad and Tobago": ["Port of Spain", "Chaguanas", "San Fernando", "Arima", "Point Fortin"],
+          "Tuvalu": ["Funafuti", "Asau", "Lolua", "Savave", "Fangaua"],
+          "Vanuatu": ["Port Vila", "Luganville", "Norsup", "Port Olry", "Isangel"],
+          "Vatican City": ["Vatican City", "St. Peter's Square", "Vatican Gardens", "Sistine Chapel", "Apostolic Palace"],
+          "Western Sahara": ["El Aaiun", "Dakhla", "Smara", "Cape Bojador", "Lagouira"],
+          "Lao PDR": ["Vientiane", "Pakse", "Savannakhet", "Luang Prabang", "Xam Neua"],
+          "Falkland Is.": ["Stanley", "Camp", "Fox Bay", "Port Howard", "Goose Green"],
+          "Antarctica": ["McMurdo Station", "Amundsen-Scott Station", "Palmer Station", "Ross Dependency", "Queen Maud Land"],
+          "Eq. Guinea": ["Bioko Norte", "Bioko Sur", "Centro Sur", "Kié-Ntem", "Litoral", "Wele-Nzas", "Annobón", "Djibloho"],
+          "Vietnam": ["Hanoi", "Ho Chi Minh City", "Da Nang", "Hai Phong", "Can Tho", "An Giang", "Bac Giang", "Dong Nai", "Khanh Hoa", "Thanh Hoa"],
+          "Solomon Is.": ["Central", "Choiseul", "Guadalcanal", "Isabel", "Makira-Ulawa", "Malaita", "Rennell and Bellona", "Temotu", "Western", "Honiara"],
+          "New Caledonia": ["North Province", "South Province", "Loyalty Islands Province"],
+          "Dem. Rep. Korea": ["Pyongyang", "North Pyongan", "South Pyongan", "Kangwon", "Ryanggang"],
+          "Korea": ["Seoul", "Gyeonggi", "Busan", "Daegu", "Jeju"],
+          "Somaliland": ["Hargeisa", "Berbera", "Burao", "Borama", "Erigavo"],
+        };
+
+        // Dunyo chegaralarini yuklash (GeoJSON)
+        fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
+            .then(res => res.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: {
+                        fillColor: '#1a2a3a',
+                        weight: 1,
+                        opacity: 1,
+                        color: '#334455',
+                        fillOpacity: 0.6
+                    },
+                    onEachFeature: function (feature, layer) {
+                        layer.on('click', function (e) {
+                            const name = feature.properties.name;
+                            showCountryInfo(name);
+                            
+                            // Ovozli aytish
+                            speak(name);
+
+                            // Xaritani o'sha davlatga yaqinlashtirish
+                            map.fitBounds(e.target.getBounds());
+                        });
+                    }
+                }).addTo(map);
+            });
+
+        function showCountryInfo(name) {
+            const box = document.getElementById('infoBox');
+            const nameEl = document.getElementById('countryName');
+            const listEl = document.getElementById('regionsList');
+
+            nameEl.innerText = name;
+            listEl.innerHTML = '';
+            box.style.display = 'block';
+
+            // Agar ma'lumot bo'lsa viloyatlarni chiqarish
+            const regions = countryData[name] || ["Ma'lumotlar bazada mavjud emas"];
+            
+            regions.forEach(r => {
+                const span = document.createElement('span');
+                span.className = 'region-tag';
+                span.innerText = r;
+                listEl.appendChild(span);
+            });
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel(); // Avvalgi ovozni to'xtatish
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.lang = 'en-US'; // Ko'pchilik tizimda inglizcha aniq ishlaydi
+            msg.rate = 0.8;
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
