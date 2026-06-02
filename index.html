@@ -105,222 +105,1256 @@
 
         // Ba'zi davlatlar ma'lumotlari
         const countryData = {
-          "Afghanistan": ["Kabul", "Kandahar", "Herat", "Balkh", "Nangarhar"],
-          "Albania": ["Tirana", "Durres", "Vlore", "Shkoder", "Elbasan"],
-          "Algeria": ["Algiers", "Oran", "Constantine", "Annaba", "Blida"],
-          "Argentina": ["Buenos Aires", "Cordoba", "Santa Fe", "Mendoza", "Tucuman"],
-          "Australia": ["New South Wales", "Victoria", "Queensland", "Tasmania", "Western Australia"],
-          "Austria": ["Vienna", "Salzburg", "Tyrol", "Styria", "Carinthia"],
-          "Azerbaijan": ["Baku", "Ganja", "Sumqayit", "Lankaran", "Shaki"],
-          "Bangladesh": ["Dhaka", "Chittagong", "Khulna", "Rajshahi", "Sylhet"],
-          "Belarus": ["Minsk", "Gomel", "Brest", "Vitebsk", "Grodno"],
-          "Belgium": ["Brussels", "Flanders", "Wallonia", "Antwerp", "Liege"],
-          "Brazil": ["Sao Paulo", "Rio de Janeiro", "Bahia", "Parana", "Amazonas"],
-          "Bulgaria": ["Sofia", "Plovdiv", "Varna", "Burgas", "Ruse"],
-          "Canada": ["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba"],
-          "China": ["Beijing", "Shanghai", "Guangdong", "Sichuan", "Xinjiang"],
-          "Colombia": ["Bogota", "Antioquia", "Valle del Cauca", "Santander", "Bolivar"],
-          "Croatia": ["Zagreb", "Split", "Rijeka", "Osijek", "Dubrovnik"],
-          "Czech Republic": ["Prague", "Brno", "Ostrava", "Plzen", "Liberec"],
-          "Denmark": ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
-          "Egypt": ["Cairo", "Alexandria", "Giza", "Luxor", "Aswan"],
-          "Estonia": ["Tallinn", "Tartu", "Narva", "Parnu", "Viljandi"],
-          "Finland": ["Helsinki", "Espoo", "Tampere", "Turku", "Oulu"],
-          "France": ["Paris", "Lyon", "Marseille", "Toulouse", "Nice"],
-          "Germany": ["Bavaria", "Berlin", "Hamburg", "Saxony", "Hesse"],
-          "Greece": ["Athens", "Thessaloniki", "Crete", "Patras", "Larissa"],
-          "Hungary": ["Budapest", "Debrecen", "Szeged", "Miskolc", "Pecs"],
-          "India": ["Maharashtra", "Delhi", "Karnataka", "Tamil Nadu", "Gujarat"],
-          "Indonesia": ["Jakarta", "Bali", "West Java", "Sumatra", "Sulawesi"],
-          "Iran": ["Tehran", "Isfahan", "Shiraz", "Tabriz", "Mashhad"],
-          "Iraq": ["Baghdad", "Basra", "Mosul", "Erbil", "Najaf"],
-          "Ireland": ["Dublin", "Cork", "Galway", "Limerick", "Waterford"],
-          "Israel": ["Jerusalem", "Tel Aviv", "Haifa", "Nazareth", "Beersheba"],
-          "Italy": ["Rome", "Milan", "Naples", "Sicily", "Venice"],
-          "Japan": ["Tokyo", "Osaka", "Kyoto", "Hokkaido", "Fukuoka"],
-          "Kazakhstan": ["Astana", "Almaty", "Shymkent", "Aktobe", "Karaganda"],
-          "Kyrgyzstan": ["Bishkek", "Osh", "Jalal-Abad", "Naryn", "Talas"],
-          "Malaysia": ["Kuala Lumpur", "Selangor", "Sabah", "Sarawak", "Penang"],
-          "Mexico": ["Mexico City", "Jalisco", "Nuevo Leon", "Puebla", "Yucatan"],
-          "Mongolia": ["Ulaanbaatar", "Darkhan", "Erdenet", "Khovd", "Sukhbaatar"],
-          "Netherlands": ["Amsterdam", "Rotterdam", "Utrecht", "Eindhoven", "Groningen"],
-          "New Zealand": ["Auckland", "Wellington", "Canterbury", "Otago", "Waikato"],
-          "Norway": ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromso"],
-          "Pakistan": ["Punjab", "Sindh", "Balochistan", "Khyber Pakhtunkhwa", "Islamabad"],
-          "Poland": ["Warsaw", "Krakow", "Lodz", "Wroclaw", "Poznan"],
-          "Portugal": ["Lisbon", "Porto", "Braga", "Coimbra", "Faro"],
-          "Romania": ["Bucharest", "Cluj", "Timisoara", "Iasi", "Constanta"],
-          "Russia": ["Moscow", "Saint Petersburg", "Siberia", "Tatarstan", "Chechnya"],
-          "Saudi Arabia": ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam"],
-          "South Africa": ["Gauteng", "Cape Town", "Durban", "Pretoria", "Johannesburg"],
-          "South Korea": ["Seoul", "Busan", "Incheon", "Daegu", "Jeju"],
-          "Spain": ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao"],
-          "Sweden": ["Stockholm", "Gothenburg", "Malmo", "Uppsala", "Kiruna"],
-          "Switzerland": ["Zurich", "Geneva", "Bern", "Basel", "Lausanne"],
-          "Tajikistan": ["Dushanbe", "Khujand", "Kulob", "Bokhtar", "Panjakent"],
-          "Thailand": ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Khon Kaen"],
-          "Turkey": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya"],
-          "Turkmenistan": ["Ashgabat", "Turkmenabat", "Dashoguz", "Mary", "Balkanabat"],
-          "Ukraine": ["Kyiv", "Kharkiv", "Odessa", "Lviv", "Dnipro"],
-          "United Kingdom": ["England", "Scotland", "Wales", "Northern Ireland", "London"],
-          "United States": ["California", "Texas", "Florida", "New York", "Illinois"],
-          "Uzbekistan": ["Andijon", "Buxoro", "Jizzax", "Namangan", "Navoiy", "Qashqadaryo", "Samarqand", "Sirdaryo", "Surxondaryo", "Toshkent", "Xorazm",],
-          "Venezuela": ["Caracas", "Maracaibo", "Valencia", "Barquisimeto", "Merida"],
-          "Helvetica": ["Hanoi", "Ho Chi Minh City", "Da Nang", "Hue", "Can Tho"],
-          "Ecuador": ["Quito", "Guayaquil", "Cuenca", "Santo Domingo", "Machala"],
-          "Gambia": ["Banjul", "Serekunda", "Brikama", "Farafenni", "Bakau"],
-          "Guinea": ["Conakry", "Nzerekore", "Kankan", "Kindia", "Labe"],
-          "Guinea-Bissau": ["Bissau", "Bafata", "Gabu", "Bissora", "Bolama"],
-          "Paraguay": ["Asuncion", "Ciudad del Este", "San Lorenzo", "Luque", "Encarnacion"],
-          "Peru": ["Lima", "Cusco", "Arequipa", "Trujillo", "Iquitos"],
-          "Senegal": ["Dakar", "Thies", "Kaolack", "Ziguinchor", "Saint-Louis"],
-          "Sierra Leone": ["Freetown", "Bo", "Kenema", "Makeni", "Koidu"],
-          "Uruguay": ["Montevideo", "Salto", "Ciudad de la Costa", "Paysandu", "Maldonado"],
-          "Angola": ["Luanda", "Huambo", "Lobito", "Benguela", "Lubango"],
-          "Armenia": ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Hrazdan"],
-          "Bahamas": ["Nassau", "Freeport", "West End", "Coopers Town", "Marsh Harbour"],
-          "Bahrain": ["Manama", "Riffa", "Muharraq", "Hamad Town", "Aali"],
-          "Bolivia": ["Sucre", "La Paz", "Santa Cruz", "Cochabamba", "Potosi"],
-          "Cameroon": ["Yaounde", "Douala", "Garoua", "Bamenda", "Maroua"],
-          "Central African Republic": ["Bangui", "Bimbo", "Berberati", "Carnot", "Bambari"],
-          "Chad": ["N'Djamena", "Moundou", "Sarh", "Abeche", "Kelo"],
-          "Chile": ["Santiago", "Valparaiso", "Concepcion", "Antofagasta", "Valdivia"],
-          "Congo": ["Brazzaville", "Pointe-Noire", "Dolisie", "Nkayi", "Impfondo"],
-          "Costa Rica": ["San Jose", "Alajuela", "Cartago", "Heredia", "Liberia"],
-          "Cuba": ["Havana", "Santiago de Cuba", "Camaguey", "Holguin", "Guantanamo"],
-          "Cyprus": ["Nicosia", "Limassol", "Larnaca", "Paphos", "Kyrenia"],
-          "Democratic Republic of the Congo": ["Kinshasa", "Lubumbashi", "Mbuji-Mayi", "Kisangani", "Goma"],
-          "Dominican Republic": ["Santo Domingo", "Santiago", "La Romana", "San Pedro", "Puerto Plata"],
-          "El Salvador": ["San Salvador", "Santa Ana", "San Miguel", "Mejicanos", "Santa Tecla"],
-          "Ethiopia": ["Addis Ababa", "Gondar", "Mekele", "Awasa", "Bahir Dar"],
-          "Georgia": ["Tbilisi", "Kutaisi", "Batumi", "Rustavi", "Zugdidi"],
-          "Ghana": ["Accra", "Kumasi", "Tamale", "Takoradi", "Ashaiman"],
-          "Guatemala": ["Guatemala City", "Mixco", "Villa Nueva", "Quetzaltenango", "Escuintla"],
-          "Honduras": ["Tegucigalpa", "San Pedro Sula", "Choloma", "La Ceiba", "El Progreso"],
-          "Iceland": ["Reykjavik", "Kopavogur", "Hafnarfjordur", "Akureyri", "Reykjanesbaer"],
-          "Ivory Coast": ["Yamoussoukro", "Abidjan", "Bouake", "Daloa", "San-Pedro"],
-          "Jamaica": ["Kingston", "New Kingston", "Spanish Town", "Portmore", "Montego Bay"],
-          "Jordan": ["Amman", "Zarqa", "Irbid", "Aqaba", "Jerash"],
-          "Kenya": ["Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret"],
-          "Kuwait": ["Kuwait City", "Dasman", "Sharq", "Mirgab", "Jibla"],
-          "Latvia": ["Riga", "Daugavpils", "Liepaja", "Jelgava", "Jurmala"],
-          "Lebanon": ["Beirut", "Tripoli", "Sidon", "Tyre", "Byblos"],
-          "Libya": ["Tripoli", "Benghazi", "Misrata", "Tarhuna", "Al Khums"],
-          "Lithuania": ["Vilnius", "Kaunas", "Klaipeda", "Siauliai", "Panevezys"],
-          "Luxembourg": ["Luxembourg City", "Esch-sur-Alzette", "Differdange", "Dudelange", "Ettelbruck"],
-          "Madagascar": ["Antananarivo", "Toamasina", "Antsirabe", "Mahajanga", "Fianarantsoa"],
-          "Mali": ["Bamako", "Sikasso", "Mopti", "Koutiala", "Kayes"],
-          "Malta": ["Valletta", "Birkirkara", "Qormi", "Sliema", "Mosta"],
-          "Moldova": ["Chisinau", "Balti", "Tiraspol", "Bender", "Kahul"],
-          "Montenegro": ["Podgorica", "Niksic", "Pljevlja", "Bijelo Polje", "Cetinje"],
-          "Morocco": ["Rabat", "Casablanca", "Marrakesh", "Fes", "Tangier"],
-          "Mozambique": ["Maputo", "Matola", "Beira", "Nampula", "Chimoio"],
-          "Nicaragua": ["Managua", "Leon", "Masaya", "Matagalpa", "Chinandega"],
-          "Niger": ["Niamey", "Zinder", "Maradi", "Tahoua", "Agadez"],
-          "Nigeria": ["Abuja", "Lagos", "Kano", "Ibadan", "Kaduna"],
-          "North Macedonia": ["Skopje", "Bitola", "Kumanovo", "Prilep", "Tetovo"],
-          "Oman": ["Muscat", "Salalah", "Seeb", "Sohar", "Nizwa"],
-          "Panama": ["Panama City", "San Miguelito", "Tocumen", "David", "Colon"],
-          "Philippines": ["Manila", "Quezon City", "Davao City", "Cebu City", "Zamboanga"],
-          "Qatar": ["Doha", "Al Rayyan", "Al Wakrah", "Al Khor", "Umm Salal"],
-          "Singapore": ["Central Region", "East Region", "North Region", "North-East Region", "West Region"],
-          "Slovakia": ["Bratislava", "Kosice", "Presov", "Zilina", "Nitra"],
-          "Slovenia": ["Ljubljana", "Maribor", "Celje", "Kranj", "Velenje"],
-          "Somalia": ["Mogadishu", "Hargeisa", "Bosaso", "Galkayo", "Merca"],
-          "Sri Lanka": ["Colombo", "Kandy", "Galle", "Jaffna", "Negombo"],
-          "Sudan": ["Khartoum", "Omdurman", "Khartoum North", "Port Sudan", "Nyala"],
-          "Syria": ["Damascus", "Aleppo", "Homs", "Latakia", "Hama"],
-          "Tanzania": ["Dodoma", "Dar es Salaam", "Mwanza", "Arusha", "Mbeya"],
-          "Tunisia": ["Tunis", "Sfax", "Sousse", "Kairouan", "Bizerte"],
-          "Uganda": ["Kampala", "Nansana", "Kira", "Mbarara", "Mukono"],
-          "United Arab Emirates": ["Abu Dhabi", "Dubai", "Sharjah", "Ajman", "Al Ain"],
-          "Yemen": ["Sanaa", "Aden", "Taiz", "Al Hudaydah", "Mukalla"],
-          "Zambia": ["Lusaka", "Kitwe", "Ndola", "Kabwe", "Chingola"],
-          "Zimbabwe": ["Harare", "Bulawayo", "Chitungwiza", "Mutare", "Gweru"],
-          "Dem. Rep. Congo": ["Kinshasa", "Lubumbashi", "Mbuji-Mayi", "Kisangani", "Goma"],
-          "Greenland": ["Nuuk", "Sisimiut", "Ilulissat", "Qaqortoq", "Aasiaat"],
-          "Belize": ["Belmopan", "Belize City", "San Ignacio", "Orange Walk", "Dangriga"],
-          "Benin": ["Porto-Novo", "Cotonou", "Parakou", "Djougou", "Bohicon"],
-          "Togo": ["Lome", "Sokode", "Kara", "Atakpame", "Kpalime"],
-          "Botswana": ["Gaborone", "Francistown", "Molepolole", "Maun", "Serowe"],
-          "Central African Rep.": ["Bangui", "Bimbo", "Berberati", "Carnot", "Bambari"],
-           "Côte d'Ivoire": ["Yamoussoukro", "Abidjan", "Bouake", "Daloa", "San-Pedro"],
-          "Gabon": ["Libreville", "Port-Gentil", "Franceville", "Oyem", "Moanda"],
-          "Liberia": ["Monrovia", "Gbarnga", "Kakata", "Bensonville", "Harper"],
-          "Namibia": ["Windhoek", "Walvis Bay", "Swakopmund", "Henties Bay", "Oshakati"],
-          "Albania": ["Tirana", "Durres", "Vlore", "Shkoder", "Elbasan"],
-          "Andorra": ["Andorra la Vella", "Escaldes-Engordany", "Encamp", "Sant Julia de Loria", "La Massana"],
-          "Antigua and Barbuda": ["St. John's", "All Saints", "Liberta", "Potters Village", "Bolans"],
-          "Barbados": ["Bridgewater", "Speightstown", "Oistins", "Bathsheba", "Holetown"],
-          "Belize": ["Belmopan", "Belize City", "San Ignacio", "Orange Walk", "Dangriga"],
-          "Benin": ["Porto-Novo", "Cotonou", "Parakou", "Djougou", "Bohicon"],
-          "Bhutan": ["Thimphu", "Phuntsholing", "Paro", "Gelephu", "Punakha"],
-          "Bosnia and Herzegovina": ["Sarajevo", "Banja Luka", "Tuzla", "Zenica", "Mostar"],
-          "Brunei": ["Bandar Seri Begawan", "Kuala Belait", "Seria", "Tutong", "Bangar"],
-          "Burkina Faso": ["Ouagadougou", "Bobo-Dioulasso", "Koudougou", "Ouahigouya", "Banfora"],
-          "Burundi": ["Gitega", "Bujumbura", "Muyinga", "Ngozi", "Rumonge"],
-          "Cabo Verde": ["Praia", "Mindelo", "Santa Maria", "Assomada", "Porto Novo"],
-          "Cambodia": ["Phnom Penh", "Siem Reap", "Battambang", "Sihanoukville", "Poipet"],
-          "Comoros": ["Moroni", "Mutsamudu", "Fomboni", "Domoni", "Mirontsi"],
-          "Cuba": ["Havana", "Santiago de Cuba", "Camaguey", "Holguin", "Guantanamo"],
-          "Djibouti": ["Djibouti City", "Ali Sabieh", "Tadjoura", "Dikhil", "Obock"],
-          "Dominica": ["Roseau", "Portsmouth", "Marigot", "Berekua", "Mahaut"],
-          "Equatorial Guinea": ["Malabo", "Bata", "Ebebiyin", "Oyala", "Mongomo"],
-          "Eritrea": ["Asmara", "Keren", "Massawa", "Assab", "Mendefera"],
-          "Fiji": ["Suva", "Lautoka", "Nadi", "Labasa", "Ba"],
-          "Guyana": ["Georgetown", "Linden", "New Amsterdam", "Anna Regina", "Bartica"],
-          "Haiti": ["Port-au-Prince", "Carrefour", "Delmas", "Cap-Haitien", "Gonaives"],
-          "Kirim": ["Simferopol", "Sevastopol", "Kerch", "Yevpatoria", "Yalta"],
-          "Kosovo": ["Pristina", "Prizren", "Gjilan", "Peja", "Mitrovica"],
-          "Laos": ["Vientiane", "Pakse", "Savannakhet", "Luang Prabang", "Xam Neua"],
-          "Lesotho": ["Maseru", "Teyateyaneng", "Mafeteng", "Hlotse", "Mohale's Hoek"],
-          "Liechtenstein": ["Vaduz", "Schaan", "Triesen", "Balzers", "Eschen"],
-          "Madagascar": ["Antananarivo", "Toamasina", "Antsirabe", "Mahajanga", "Fianarantsoa"],
-          "Malawi": ["Lilongwe", "Blantyre", "Mzuzu", "Zomba", "Kasungu"],
-          "Maldives": ["Male", "Addu City", "Fuvahmulah", "Kulhudhuffushi", "Thinadhoo"],
-          "Mauritania": ["Nouakchott", "Nouadhibou", "Nema", "Kaedi", "Zouerat"],
-          "Mauritius": ["Port Louis", "Beau Bassin", "Vacoas", "Curepipe", "Quatre Bornes"],
-          "Micronesia": ["Palikir", "Weno", "Tol", "Kolonia", "Nett"],
-          "Monaco": ["Monaco Ville", "Monte Carlo", "La Condamine", "Fontvieille", "Moneghetti"],
-          "Myanmar": ["Naypyidaw", "Yangon", "Mandalay", "Mawlamyine", "Taunggyi"],
-          "Nauru": ["Yaren", "Denigomodu", "Meneng", "Aiwo", "Boe"],
-          "Nepal": ["Kathmandu", "Pokhara", "Lalitpur", "Bharatpur", "Biratnagar"],
-          "North Korea": ["Pyongyang", "Hamhung", "Chongjin", "Nampo", "Wonsan"],
-          "Palestine": ["Jerusalem", "Gaza City", "Ramallah", "Hebron", "Nablus"],
-          "Papua New Guinea": ["Port Moresby", "Lae", "Arawa", "Mount Hagen", "Madang"],
-          "Rwanda": ["Kigali", "Butare", "Gisenyi", "Gitarama", "Ruhengeri"],
-          "Saint Kitts and Nevis": ["Basseterre", "Charlestown", "Sadlers", "Cayon", "Sandy Point"],
-          "Saint Lucia": ["Castries", "Gros Islet", "Vieux Fort", "Soufriere", "Dennery"],
-          "Saint Vincent and the Grenadines": ["Kingstown", "Georgetown", "Byera", "Barrouallie", "Layou"],
-          "Samoa": ["Apia", "Vaitele", "Faleasiu", "Vailele", "Leulumoega"],
-          "San Marino": ["San Marino", "Serravalle", "Borgo Maggiore", "Domagnano", "Fiorentino"],
-          "Sao Tome and Principe": ["Sao Tome", "Trindade", "Neves", "Santana", "San Antonio"],
-          "Seychelles": ["Victoria", "Anse Etoile", "Beau Vallon", "Anse Royale", "Cascade"],
-          "Solomon Islands": ["Honiara", "Gizo", "Auki", "Noro", "Kirakira"],
-          "South Sudan": ["Juba", "Malakal", "Wau", "Yei", "Yambio"],
-          "Suriname": ["Paramaribo", "Lelydorp", "New Nickerie", "Moengo", "Nieuw Amsterdam"],
-          "Eswatini": ["Mbabane", "Manzini", "Lobamba", "Big Bend", "Siteki"],
-          "Taiwan": ["Taipei", "Kaohsiung", "Taichung", "Tainan", "Hsinchu"],
-          "Timor-Leste": ["Dili", "Dare", "Baucau", "Maliana", "Suai"],
-          "Togo": ["Lome", "Sokode", "Kara", "Atakpame", "Kpalime"],
-          "Tonga": ["Nuku'alofa", "Mu'a", "Neiafu", "Haveluloto", "Vaini"],
-          "Trinidad and Tobago": ["Port of Spain", "Chaguanas", "San Fernando", "Arima", "Point Fortin"],
-          "Tuvalu": ["Funafuti", "Asau", "Lolua", "Savave", "Fangaua"],
-          "Vanuatu": ["Port Vila", "Luganville", "Norsup", "Port Olry", "Isangel"],
-          "Vatican City": ["Vatican City", "St. Peter's Square", "Vatican Gardens", "Sistine Chapel", "Apostolic Palace"],
-          "Western Sahara": ["El Aaiun", "Dakhla", "Smara", "Cape Bojador", "Lagouira"],
-          "Lao PDR": ["Vientiane", "Pakse", "Savannakhet", "Luang Prabang", "Xam Neua"],
-          "Falkland Is.": ["Stanley", "Camp", "Fox Bay", "Port Howard", "Goose Green"],
-          "Antarctica": ["McMurdo Station", "Amundsen-Scott Station", "Palmer Station", "Ross Dependency", "Queen Maud Land"],
-          "Eq. Guinea": ["Bioko Norte", "Bioko Sur", "Centro Sur", "Kié-Ntem", "Litoral", "Wele-Nzas", "Annobón", "Djibloho"],
-          "Vietnam": ["Hanoi", "Ho Chi Minh City", "Da Nang", "Hai Phong", "Can Tho", "An Giang", "Bac Giang", "Dong Nai", "Khanh Hoa", "Thanh Hoa"],
-          "Solomon Is.": ["Central", "Choiseul", "Guadalcanal", "Isabel", "Makira-Ulawa", "Malaita", "Rennell and Bellona", "Temotu", "Western", "Honiara"],
-          "New Caledonia": ["North Province", "South Province", "Loyalty Islands Province"],
-          "Dem. Rep. Korea": ["Pyongyang", "North Pyongan", "South Pyongan", "Kangwon", "Ryanggang"],
-          "Korea": ["Seoul", "Gyeonggi", "Busan", "Daegu", "Jeju"],
-          "Somaliland": ["Hargeisa", "Berbera", "Burao", "Borama", "Erigavo"],
-        };
-
+          {
+  "Afghanistan": {
+    "regions": ["Kabul", "Kandahar", "Herat", "Balkh", "Nangarhar"],
+    "rivers": ["Amu Darya", "Helmand", "Kabul"],
+    "people": ["Ahmad Shah Durrani", "Malala Yousafzai", "Khaled Hosseini"],
+    "food": ["Kabuli Pulao", "Mantu", "Bolani"]
+  },
+  "Albania": {
+    "regions": ["Tirana", "Durres", "Vlore", "Shkoder", "Elbasan"],
+    "rivers": ["Drin", "Vjosa", "Devoll"],
+    "people": ["Mother Teresa", "Skanderbeg", "Ismail Kadare"],
+    "food": ["Tavë Kosi", "Byrek", "Flija"]
+  },
+  "Algeria": {
+    "regions": ["Algiers", "Oran", "Constantine", "Annaba", "Blida"],
+    "rivers": ["Chelif", "Soummam", "Merdja"],
+    "people": ["Ahmed Ben Bella", "Zinedine Zidane", "Albert Camus"],
+    "food": ["Couscous", "Tajine", "Chakchouka"]
+  },
+  "Argentina": {
+    "regions": ["Buenos Aires", "Cordoba", "Santa Fe", "Mendoza", "Tucuman"],
+    "rivers": ["Parana", "Uruguay", "Colorado"],
+    "people": ["Lionel Messi", "Diego Maradona", "Che Guevara"],
+    "food": ["Asado", "Empanadas", "Milanesa", "Dulce de Leche"]
+  },
+  "Australia": {
+    "regions": ["New South Wales", "Victoria", "Queensland", "Tasmania", "Western Australia"],
+    "rivers": ["Murray", "Darling", "Murrumbidgee"],
+    "people": ["Hugh Jackman", "Steve Irwin", "Cathy Freeman"],
+    "food": ["Meat Pie", "Vegemite on Toast", "Lamingtons", "Pavlova"]
+  },
+  "Austria": {
+    "regions": ["Vienna", "Salzburg", "Tyrol", "Styria", "Carinthia"],
+    "rivers": ["Danube", "Inn", "Mur"],
+    "people": ["Wolfgang Amadeus Mozart", "Arnold Schwarzenegger", "Sigmund Freud"],
+    "food": ["Wiener Schnitzel", "Sachertorte", "Apfelstrudel"]
+  },
+  "Azerbaijan": {
+    "regions": ["Baku", "Ganja", "Sumqayit", "Lankaran", "Shaki"],
+    "rivers": ["Kura", "Aras", "Tartarchay"],
+    "people": ["Heydar Aliyev", "Nizami Ganjavi", "Garry Kasparov"],
+    "food": ["Shah Plov", "Dushbara", "Lula Kebab", "Kutab"]
+  },
+  "Bangladesh": {
+    "regions": ["Dhaka", "Chittagong", "Khulna", "Rajshahi", "Sylhet"],
+    "rivers": ["Padma", "Jamuna", "Meghna"],
+    "people": ["Rabindranath Tagore", "Sheikh Mujibur Rahman", "Muhammad Yunus"],
+    "food": ["Ilish Fish Curry", "Biryani", "Panta Bhat"]
+  },
+  "Belarus": {
+    "regions": ["Minsk", "Gomel", "Brest", "Vitebsk", "Grodno"],
+    "rivers": ["Dnieper", "Pripyat", "Neman"],
+    "people": ["Alexander Lukashenko", "Marc Chagall", "Svetlana Alexievich"],
+    "food": ["Draniki", "Machanka", "Kalduny"]
+  },
+  "Belgium": {
+    "regions": ["Brussels", "Flanders", "Wallonia", "Antwerp", "Liege"],
+    "rivers": ["Meuse", "Scheldt", "Yser"],
+    "people": ["René Magritte", "Audrey Hepburn", "Kevin De Bruyne"],
+    "food": ["Belgian Waffles", "Moules-Frites", "Belgian Chocolate"]
+  },
+  "Brazil": {
+    "regions": ["Sao Paulo", "Rio de Janeiro", "Bahia", "Parana", "Amazonas"],
+    "rivers": ["Amazon", "Parana", "Buranhém"],
+    "people": ["Pelé", "Ayrton Senna", "Santos-Dumont"],
+    "food": ["Feijoada", "Churrasco", "Pão de Queijo", "Coxinha"]
+  },
+  "Bulgaria": {
+    "regions": ["Sofia", "Plovdiv", "Varna", "Burgas", "Ruse"],
+    "rivers": ["Danube", "Maritsa", "Struma"],
+    "people": ["Hristo Stoichkov", "Baba Vanga", "John Atanasoff"],
+    "food": ["Shopska Salad", "Banitsa", "Kavarma"]
+  },
+  "Canada": {
+    "regions": ["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba"],
+    "rivers": ["St. Lawrence", "Mackenzie", "Yukon"],
+    "people": ["Justin Bieber", "Ryan Reynolds", "Terry Fox"],
+    "food": ["Poutine", "Maple Syrup Pancakes", "Butter Tarts"]
+  },
+  "China": {
+    "regions": ["Beijing", "Shanghai", "Guangdong", "Sichuan", "Xinjiang"],
+    "rivers": ["Yangtze", "Yellow River", "Pearl River"],
+    "people": ["Mao Zedong", "Jack Ma", "Confucius"],
+    "food": ["Peking Duck", "Dim Sum", "Kung Pao Chicken", "Hotpot"]
+  },
+  "Colombia": {
+    "regions": ["Bogota", "Antioquia", "Valle del Cauca", "Santander", "Bolivar"],
+    "rivers": ["Magdalena", "Cauca", "Atrato"],
+    "people": ["Shakira", "Gabriel García Márquez", "Pablo Escobar"],
+    "food": ["Bandeja Paisa", "Ajiaco", "Arepas"]
+  },
+  "Croatia": {
+    "regions": ["Zagreb", "Split", "Rijeka", "Osijek", "Dubrovnik"],
+    "rivers": ["Sava", "Drava", "Danube"],
+    "people": ["Nikola Tesla", "Luka Modric", "Marco Polo"],
+    "food": ["Peka", "Crni Rižot", "Ćevapi"]
+  },
+  "Czech Republic": {
+    "regions": ["Prague", "Brno", "Ostrava", "Plzen", "Liberec"],
+    "rivers": ["Vltava", "Elbe", "Oder"],
+    "people": ["Franz Kafka", "Karel Čapek", "Jaromír Jágr"],
+    "food": ["Vepřo Knedlo Zelo", "Goulash", "Trdelník"]
+  },
+  "Denmark": {
+    "regions": ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg"],
+    "rivers": ["Gudenå", "Storå", "Varde Å"],
+    "people": ["Hans Christian Andersen", "Niels Bohr", "Mads Mikkelsen"],
+    "food": ["Smørrebrød", "Frikadeller", "Wienerbrød"]
+  },
+  "Egypt": {
+    "regions": ["Cairo", "Alexandria", "Giza", "Luxor", "Aswan"],
+    "rivers": ["Nile"],
+    "people": ["Mohamed Salah", "Cleopatra", "Anwar Sadat"],
+    "food": ["Koshari", "Ful Medames", "Molokhia"]
+  },
+  "Estonia": {
+    "regions": ["Tallinn", "Tartu", "Narva", "Parnu", "Viljandi"],
+    "rivers": ["Emajõgi", "Narva", "Pärnu"],
+    "people": ["Arvo Pärt", "Lennart Meri", "Kelly Sildaru"],
+    "food": ["Verivorst", "Kiluvõileib", "Mulgipuder"]
+  },
+  "Finland": {
+    "regions": ["Helsinki", "Espoo", "Tampere", "Turku", "Oulu"],
+    "rivers": ["Kemijoki", "Kymijoki", "Oulujoki"],
+    "people": ["Tove Jansson", "Jean Sibelius", "Kimi Räikkönen"],
+    "food": ["Karjalanpiirakka", "Kalakukko", "Sautéed Reindeer"]
+  },
+  "France": {
+    "regions": ["Paris", "Lyon", "Marseille", "Toulouse", "Nice"],
+    "rivers": ["Seine", "Loire", "Rhône", "Garonne"],
+    "people": ["Napoleon Bonaparte", "Zinedine Zidane", "Victor Hugo"],
+    "food": ["Baguette", "Coq au Vin", "Croissant", "Ratatouille"]
+  },
+  "Germany": {
+    "regions": ["Bavaria", "Berlin", "Hamburg", "Saxony", "Hesse"],
+    "rivers": ["Rhine", "Danube", "Elbe"],
+    "people": ["Albert Einstein", "Ludwig van Beethoven", "Angela Merkel"],
+    "food": ["Bratwurst", "Sauerkraut", "Pretzel", "Schnitzel"]
+  },
+  "Greece": {
+    "regions": ["Athens", "Thessaloniki", "Crete", "Patras", "Larissa"],
+    "rivers": ["Haliacmon", "Achelous", "Peneus"],
+    "people": ["Socrates", "Aristotle", "Giannis Antetokounmpo"],
+    "food": ["Moussaka", "Souvlaki", "Greek Salad", "Gyros"]
+  },
+  "Hungary": {
+    "regions": ["Budapest", "Debrecen", "Szeged", "Miskolc", "Pecs"],
+    "rivers": ["Danube", "Tisza", "Rába"],
+    "people": ["Ferenc Puskás", "Ernő Rubik", "Franz Liszt"],
+    "food": ["Goulash", "Lángos", "Chicken Paprikash"]
+  },
+  "India": {
+    "regions": ["Maharashtra", "Delhi", "Karnataka", "Tamil Nadu", "Gujarat"],
+    "rivers": ["Ganges", "Indus", "Brahmaputra", "Godavari"],
+    "people": ["Mahatma Gandhi", "Sachin Tendulkar", "Shah Rukh Khan"],
+    "food": ["Biryani", "Butter Chicken", "Dosa", "Samosa"]
+  },
+  "Indonesia": {
+    "regions": ["Jakarta", "Bali", "West Java", "Sumatra", "Sulawesi"],
+    "rivers": ["Kapuas", "Mahakam", "Barito"],
+    "people": ["Sukarno", "B.J. Habibie", "Joko Widodo"],
+    "food": ["Nasi Goreng", "Sate", "Rendang", "Gado-Gado"]
+  },
+  "Iran": {
+    "regions": ["Tehran", "Isfahan", "Shiraz", "Tabriz", "Mashhad"],
+    "rivers": ["Karun", "Zayanderud", "Sefidrud"],
+    "people": ["Cyrus the Great", "Avicenna", "Ali Daei"],
+    "food": ["Ghormeh Sabzi", "Chelo Kebab", "Fesenjan"]
+  },
+  "Iraq": {
+    "regions": ["Baghdad", "Basra", "Mosul", "Erbil", "Najaf"],
+    "rivers": ["Tigris", "Euphrates", "Shatt al-Arab"],
+    "people": ["Saddam Hussein", "Zaha Hadid", "Al-Mutanabbi"],
+    "food": ["Masgouf", "Dolma", "Kleicha"]
+  },
+  "Ireland": {
+    "regions": ["Dublin", "Cork", "Galway", "Limerick", "Waterford"],
+    "rivers": ["Shannon", "Liffey", "Boyne"],
+    "people": ["Oscar Wilde", "Bono", "Conor McGregor"],
+    "food": ["Irish Stew", "Boxty", "Soda Bread"]
+  },
+  "Israel": {
+    "regions": ["Jerusalem", "Tel Aviv", "Haifa", "Nazareth", "Beersheba"],
+    "rivers": ["Jordan", "Yarkon", "Kishon"],
+    "people": ["David Ben-Gurion", "Natalie Portman", "Gal Gadot"],
+    "food": ["Falafel", "Hummus", "Shakshuka"]
+  },
+  "Italy": {
+    "regions": ["Rome", "Milan", "Naples", "Sicily", "Venice"],
+    "rivers": ["Po", "Adige", "Tiber"],
+    "people": ["Leonardo da Vinci", "Julius Caesar", "Francesco Totti"],
+    "food": ["Pizza Margherita", "Pasta Carbonara", "Lasagna", "Gelato"]
+  },
+  "Japan": {
+    "regions": ["Tokyo", "Osaka", "Kyoto", "Hokkaido", "Fukuoka"],
+    "rivers": ["Shinano", "Tone", "Ishikari"],
+    "people": ["Hayao Miyazaki", "Akira Kurosawa", "Shohei Ohtani"],
+    "food": ["Sushi", "Ramen", "Tempura", "Takoyaki"]
+  },
+  "Kazakhstan": {
+    "regions": ["Astana", "Almaty", "Shymkent", "Aktobe", "Karaganda"],
+    "rivers": ["Irtysh", "Syr Darya", "Ural", "Ili"],
+    "people": ["Nursultan Nazarbayev", "Abai Qunanbaiuly", "Gennady Golovkin"],
+    "food": ["Beshbarmak", "Kazy", "Baursak"]
+  },
+  "Kyrgyzstan": {
+    "regions": ["Bishkek", "Osh", "Jalal-Abad", "Naryn", "Talas"],
+    "rivers": ["Naryn", "Chu", "Talas"],
+    "people": ["Chinghiz Aitmatov", "Kurmanjan Datka", "Roza Otunbayeva"],
+    "food": ["Beshbarmak", "Laghman", "Shorpo"]
+  },
+  "Malaysia": {
+    "regions": ["Kuala Lumpur", "Selangor", "Sabah", "Sarawak", "Penang"],
+    "rivers": ["Rajang", "Kinabatangan", "Pahang"],
+    "people": ["Mahathir Mohamad", "Michelle Yeoh", "Lee Chong Wei"],
+    "food": ["Nasi Lemak", "Char Kway Teow", "Roti Canai"]
+  },
+  "Mexico": {
+    "regions": ["Mexico City", "Jalisco", "Nuevo Leon", "Puebla", "Yucatan"],
+    "rivers": ["Rio Grande", "Grijalva", "Usumacinta"],
+    "people": ["Frida Kahlo", "Diego Rivera", "Guillermo del Toro"],
+    "food": ["Tacos", "Mole Poblano", "Tamales", "Guacamole"]
+  },
+  "Mongolia": {
+    "regions": ["Ulaanbaatar", "Darkhan", "Erdenet", "Khovd", "Sukhbaatar"],
+    "rivers": ["Selenge", "Kherlen", "Tuul"],
+    "people": ["Genghis Khan", "Kublai Khan", "Asashoryu Akinori"],
+    "food": ["Buuz", "Khuushuur", "Boodog"]
+  },
+  "Netherlands": {
+    "regions": ["Amsterdam", "Rotterdam", "Utrecht", "Eindhoven", "Groningen"],
+    "rivers": ["Rhine", "Meuse", "Scheldt"],
+    "people": ["Vincent van Gogh", "Anne Frank", "Max Verstappen"],
+    "food": ["Stroopwafel", "Bitterballen", "Haring"]
+  },
+  "New Zealand": {
+    "regions": ["Auckland", "Wellington", "Canterbury", "Otago", "Waikato"],
+    "rivers": ["Waikato", "Clutha", "Whanganui"],
+    "people": ["Sir Edmund Hillary", "Lorde", "Peter Jackson"],
+    "food": ["Hangi", "Pavlova", "Meat Pies"]
+  },
+  "Norway": {
+    "regions": ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromso"],
+    "rivers": ["Glomma", "Pasvikelva", "Numedalslågen"],
+    "people": ["Edvard Munch", "Henrik Ibsen", "Erling Haaland"],
+    "food": ["Fårikål", "Rakfisk", "Brunost"]
+  },
+  "Pakistan": {
+    "regions": ["Punjab", "Sindh", "Balochistan", "Khyber Pakhtunkhwa", "Islamabad"],
+    "rivers": ["Indus", "Jhelum", "Chenab"],
+    "people": ["Muhammad Ali Jinnah", "Malala Yousafzai", "Imran Khan"],
+    "food": ["Nihari", "Biryani", "Seekh Kebab"]
+  },
+  "Poland": {
+    "regions": ["Warsaw", "Krakow", "Lodz", "Wroclaw", "Poznan"],
+    "rivers": ["Vistula", "Oder", "Warta"],
+    "people": ["Marie Curie", "Nicolaus Copernicus", "Robert Lewandowski"],
+    "food": ["Pierogi", "Bigos", "Barszcz"]
+  },
+  "Portugal": {
+    "regions": ["Lisbon", "Porto", "Braga", "Coimbra", "Faro"],
+    "rivers": ["Tagus", "Douro", "Guadiana"],
+    "people": ["Cristiano Ronaldo", "Vasco da Gama", "Fernando Pessoa"],
+    "food": ["Bacalhau", "Pastel de Nata", "Caldo Verde"]
+  },
+  "Romania": {
+    "regions": ["Bucharest", "Cluj", "Timisoara", "Iasi", "Constanta"],
+    "rivers": ["Danube", "Mureș", "Prut"],
+    "people": ["Vlad the Impaler", "Gheorghe Hagi", "Simona Halep"],
+    "food": ["Sarmale", "Mămăligă", "Mici"]
+  },
+  "Russia": {
+    "regions": ["Moscow", "Saint Petersburg", "Siberia", "Tatarstan", "Chechnya"],
+    "rivers": ["Volga", "Ob", "Yenisei", "Lena"],
+    "people": ["Alexander Pushkin", "Yuri Gagarin", "Fedor Dostoevsky"],
+    "food": ["Borsch", "Pelmeni", "Beef Stroganoff", "Blini"]
+  },
+  "Saudi Arabia": {
+    "regions": ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam"],
+    "rivers": ["Wadi Al-Rimah (Seasonal)", "Wadi As-Sirhan"],
+    "people": ["King Abdulaziz", "Mohammed bin Salman", "Majed Abdullah"],
+    "food": ["Kabsa", "Mandi", "Mutabbaq"]
+  },
+  "South Africa": {
+    "regions": ["Gauteng", "Cape Town", "Durban", "Pretoria", "Johannesburg"],
+    "rivers": ["Orange", "Vaal", "Limpopo"],
+    "people": ["Nelson Mandela", "Desmond Tutu", "Elon Musk"],
+    "food": ["Biltong", "Bobotie", "Braai", "Bunny Chow"]
+  },
+  "South Korea": {
+    "regions": ["Seoul", "Busan", "Incheon", "Daegu", "Jeju"],
+    "rivers": ["Han", "Nakdong", "Geum"],
+    "people": ["King Sejong", "Son Heung-min", "Bong Joon-ho"],
+    "food": ["Kimchi", "Korean BBQ", "Bibimbap", "Tteokbokki"]
+  },
+  "Spain": {
+    "regions": ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao"],
+    "rivers": ["Ebro", "Tagus", "Guadalquivir"],
+    "people": ["Pablo Picasso", "Rafael Nadal", "Miguel de Cervantes"],
+    "food": ["Paella", "Tapas", "Gazpacho", "Jamón Ibérico"]
+  },
+  "Sweden": {
+    "regions": ["Stockholm", "Gothenburg", "Malmo", "Uppsala", "Kiruna"],
+    "rivers": ["Torne", "Lule", "Ångerman"],
+    "people": ["Alfred Nobel", "Zlatan Ibrahimović", "Abba"],
+    "food": ["Swedish Meatballs", "Gravlax", "Smörgåsbord"]
+  },
+  "Switzerland": {
+    "regions": ["Zurich", "Geneva", "Bern", "Basel", "Lausanne"],
+    "rivers": ["Rhine", "Rhône", "Aare"],
+    "people": ["Roger Federer", "Albert Einstein", "Carl Jung"],
+    "food": ["Fondue", "Raclette", "Rösti", "Swiss Chocolate"]
+  },
+  "Tajikistan": {
+    "regions": ["Dushanbe", "Khujand", "Kulob", "Bokhtar", "Panjakent"],
+    "rivers": ["Panj", "Vakhsh", "Syr Darya"],
+    "people": ["Rudaki", "Emomali Rahmon", "Ismail Samani"],
+    "food": ["Osh (Plov)", "Qurutob", "Sambusa"]
+  },
+  "Thailand": {
+    "regions": ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Khon Kaen"],
+    "rivers": ["Chao Phraya", "Mekong", "Mun"],
+    "people": ["King Bhumibol Adulyadej", "Tony Jaa", "Lisa (Blackpink)"],
+    "food": ["Pad Thai", "Tom Yum Goong", "Green Curry"]
+  },
+  "Turkey": {
+    "regions": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya"],
+    "rivers": ["Kızılırmak", "Euphrates", "Tigris"],
+    "people": ["Mustafa Kemal Atatürk", "Recep Tayyip Erdoğan", "Arda Güler"],
+    "food": ["Kebab", "Baklava", "Pide", "Lahmacun"]
+  },
+  "Turkmenistan": {
+    "regions": ["Ashgabat", "Turkmenabat", "Dashoguz", "Mary", "Balkanabat"],
+    "rivers": ["Amu Darya", "Murghab", "Tejen"],
+    "people": ["Magtymguly Pyragy", "Gurbanguly Berdimuhamedow", "Saparmurat Niyazov"],
+    "food": ["Ichlekli", "Plov", "Shurpa"]
+  },
+  "Ukraine": {
+    "regions": ["Kyiv", "Kharkiv", "Odessa", "Lviv", "Dnipro"],
+    "rivers": ["Dnieper", "Dniester", "Southern Bug"],
+    "people": ["Tarash Shevchenko", "Volodymyr Zelenskyy", "Andriy Shevchenko"],
+    "food": ["Borscht", "Varenyky", "Chicken Kiev"]
+  },
+  "United Kingdom": {
+    "regions": ["England", "Scotland", "Wales", "Northern Ireland", "London"],
+    "rivers": ["Severn", "Thames", "Trent"],
+    "people": ["William Shakespeare", "Winston Churchill", "David Beckham"],
+    "food": ["Fish and Chips", "Sunday Roast", "Full English Breakfast"]
+  },
+  "United States": {
+    "regions": ["California", "Texas", "Florida", "New York", "Illinois"],
+    "rivers": ["Mississippi", "Missouri", "Colorado"],
+    "people": ["George Washington", "Abraham Lincoln", "Michael Jordan"],
+    "food": ["Hamburger", "Apple Pie", "Barbecue Ribs", "Buffalo Wings"]
+  },
+  "Uzbekistan": {
+    "regions": ["Andijon", "Buxoro", "Jizzax", "Namangan", "Navoiy", "Qashqadaryo", "Samarqand", "Sirdaryo", "Surxondaryo", "Toshkent", "Xorazm"],
+    "rivers": ["Syr Darya", "Amu Darya", "Zarafshan"],
+    "people": ["Amir Temur", "Alisher Navoiy", "Mirzo Ulugbek", "Shavkat Mirziyoyev"],
+    "food": ["Palov", "Somsa", "Manti", "Shashlik", "Lag'mon"]
+  },
+  "Venezuela": {
+    "regions": ["Caracas", "Maracaibo", "Valencia", "Barquisimeto", "Merida"],
+    "rivers": ["Orinoco", "Caroni", "Apure"],
+    "people": ["Simón Bolívar", "Hugo Chávez", "Miguel Cabrera"],
+    "food": ["Arepas", "Pabellón Criollo", "Hallacas"]
+  },
+  "Helvetica": {
+    "regions": ["Hanoi", "Ho Chi Minh City", "Da Nang", "Hue", "Can Tho"],
+    "rivers": ["Mekong", "Red River", "Black River"],
+    "people": ["Ho Chi Minh", "General Giap", "Nguyen Du"],
+    "food": ["Pho", "Banh Mi", "Bun Cha"]
+  },
+  "Ecuador": {
+    "regions": ["Quito", "Guayaquil", "Cuenca", "Santo Domingo", "Machala"],
+    "rivers": ["Guayas", "Napo", "Pastaza"],
+    "people": ["Eloy Alfaro", "Jefferson Pérez", "Antonio Valencia"],
+    "food": ["Ceviche", "Cuy Asado", "Locro de Papa"]
+  },
+  "Gambia": {
+    "regions": ["Banjul", "Serekunda", "Brikama", "Farafenni", "Bakau"],
+    "rivers": ["Gambia"],
+    "people": ["Dawda Jawara", "Adama Barrow", "Fatou Bensouda"],
+    "food": ["Domoda", "Benachin", "Yassa"]
+  },
+  "Guinea": {
+    "regions": ["Conakry", "Nzerekore", "Kankan", "Kindia", "Labe"],
+    "rivers": ["Niger", "Senegal", "Gambia"],
+    "people": ["Ahmed Sékou Touré", "Alpha Condé", "Mory Kanté"],
+    "food": ["Poulet Yassa", "Cassava Leaves Stew", "Fufu"]
+  },
+  "Guinea-Bissau": {
+    "regions": ["Bissau", "Bafata", "Gabu", "Bissora", "Bolama"],
+    "rivers": ["Geba", "Cacheu", "Corubal"],
+    "people": ["Amílcar Cabral", "Bernardo Vieira", "Jose Mario Vaz"],
+    "food": ["Juba Fish", "Caldo de Mancarra", "Cafriela de Frango"]
+  },
+  "Paraguay": {
+    "regions": ["Asuncion", "Ciudad del Este", "San Lorenzo", "Luque", "Encarnacion"],
+    "rivers": ["Paraguay", "Parana", "Pilcomayo"],
+    "people": ["Augusto Roa Bastos", "José Luis Chilavert", "Roque Santa Cruz"],
+    "food": ["Sopa Paraguaya", "Chipa", "Mandioca"]
+  },
+  "Peru": {
+    "regions": ["Lima", "Cusco", "Arequipa", "Trujillo", "Iquitos"],
+    "rivers": ["Amazon", "Ucayali", "Marañón"],
+    "people": ["Inca Pachacuti", "Mario Vargas Llosa", "Claudio Pizarro"],
+    "food": ["Ceviche", "Lomo Saltado", "Causa Rellena"]
+  },
+  "Senegal": {
+    "regions": ["Dakar", "Thies", "Kaolack", "Ziguinchor", "Saint-Louis"],
+    "rivers": ["Senegal", "Gambia", "Casamance"],
+    "people": ["Léopold Sédar Senghor", "Sadio Mané", "Akon"],
+    "food": ["Thieboudienne", "Yassa Poulet", "Maafe"]
+  },
+  "Sierra Leone": {
+    "regions": ["Freetown", "Bo", "Kenema", "Makeni", "Koidu"],
+    "rivers": ["Rokel", "Moa", "Sewa"],
+    "people": ["Sengbe Pieh", "Siaka Stevens", "Julius Maada Bio"],
+    "food": ["Cassava Leaves Rice", "Groundnut Stew", "Jollof Rice"]
+  },
+  "Uruguay": {
+    "regions": ["Montevideo", "Salto", "Ciudad de la Costa", "Paysandu", "Maldonado"],
+    "rivers": ["Uruguay", "Negro", "De la Plata"],
+    "people": ["José Mujica", "Luis Suárez", "Edinson Cavani"],
+    "food": ["Chivito", "Asado", "Empanadas"]
+  },
+  "Angola": {
+    "regions": ["Luanda", "Huambo", "Lobito", "Benguela", "Lubango"],
+    "rivers": ["Cuanza", "Cubango", "Cunene"],
+    "people": ["Agostinho Neto", "José Eduardo dos Santos", "Eduardo Camavinga (Roots)"],
+    "food": ["Muamba de Galinha", "Funje", "Calulu"]
+  },
+  "Armenia": {
+    "regions": ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Hrazdan"],
+    "rivers": ["Hrazdan", "Aras", "Debed"],
+    "people": ["Levon Aronian", "Henrikh Mkhitaryan", "Charles Aznavour"],
+    "food": ["Khorovats", "Dolma", "Lavash"]
+  },
+  "Bahamas": {
+    "regions": ["Nassau", "Freeport", "West End", "Coopers Town", "Marsh Harbour"],
+    "rivers": ["None (No major rivers)"],
+    "people": ["Sir Sidney Poitier", "Shaunae Miller-Uibo", "Buddy Hield"],
+    "food": ["Conch Salad", "Rock Lobster", "Pigeon Peas and Rice"]
+  },
+  "Bahrain": {
+    "regions": ["Manama", "Riffa", "Muharraq", "Hamad Town", "Aali"],
+    "rivers": ["None (No rivers)"],
+    "people": ["King Hamad", "Arwa Al Ali", "Ghada Jamshir"],
+    "food": ["Machboos", "Muammar", "Halwa Bahraini"]
+  },
+  "Bolivia": {
+    "regions": ["Sucre", "La Paz", "Santa Cruz", "Cochabamba", "Potosi"],
+    "rivers": ["Mamore", "Beni", "Guapore"],
+    "people": ["Evo Morales", "Simón Patiño", "Marco Etcheverry"],
+    "food": ["Salteñas", "Pique Macho", "Silpancho"]
+  },
+  "Cameroon": {
+    "regions": ["Yaounde", "Douala", "Garoua", "Bamenda", "Maroua"],
+    "rivers": ["Sanaga", "Benue", "Nyong"],
+    "people": ["Samuel Eto'o", "Roger Milla", "Francis Ngannou"],
+    "food": ["Ndolé", "Achis", "Koki"]
+  },
+  "Central African Republic": {
+    "regions": ["Bangui", "Bimbo", "Berberati", "Carnot", "Bambari"],
+    "rivers": ["Ubangi", "Sangha", "Chari"],
+    "people": ["Jean-Bédel Bokassa", "David Dacko", "Faustin-Archange Touadéra"],
+    "food": ["Kanda", "Chichinga", "Fufu"]
+  },
+  "Chad": {
+    "regions": ["N'Djamena", "Moundou", "Sarh", "Abeche", "Kelo"],
+    "rivers": ["Chari", "Logone"],
+    "people": ["Idriss Déby", "Hissène Habré", "Mahamat Déby"],
+    "food": ["Daraba", "Esh", "Ais"]
+  },
+  "Chile": {
+    "regions": ["Santiago", "Valparaiso", "Concepcion", "Antofagasta", "Valdivia"],
+    "rivers": ["Biobío", "Loa", "Maule"],
+    "people": ["Pablo Neruda", "Gabriela Mistral", "Alexis Sánchez"],
+    "food": ["Empanadas de Pino", "Pastel de Choclo", "Cazuela"]
+  },
+  "Congo": {
+    "regions": ["Brazzaville", "Pointe-Noire", "Dolisie", "Nkayi", "Impfondo"],
+    "rivers": ["Congo", "Ubangi", "Sangha"],
+    "people": ["Denis Sassou Nguesso", "Marien Ngouabi", "Serge Ibaka"],
+    "food": ["Saka Saka", "Moambe", "Fufu"]
+  },
+  "Costa Rica": {
+    "regions": ["San Jose", "Alajuela", "Cartago", "Heredia", "Liberia"],
+    "rivers": ["San Juan", "Tempisque", "Tárcoles"],
+    "people": ["Oscar Arias", "Keylor Navas", "Franklin Chang-Díaz"],
+    "food": ["Gallo Pinto", "Casado", "Tamales"]
+  },
+  "Cuba": {
+    "regions": ["Havana", "Santiago de Cuba", "Camaguey", "Holguin", "Guantanamo"],
+    "rivers": ["Cauto", "Toa", "Sagua la Grande"],
+    "people": ["Fidel Castro", "Che Guevara", "Celia Cruz"],
+    "food": ["Ropa Vieja", "Arroz con Pollo", "Moros y Cristianos"]
+  },
+  "Cyprus": {
+    "regions": ["Nicosia", "Limassol", "Larnaca", "Paphos", "Kyrenia"],
+    "rivers": ["Pedieos", "Yialias", "Serrakhis"],
+    "people": ["Archbishop Makarios III", "Marcos Baghdatis", "Stelios Haji-Ioannou"],
+    "food": ["Halloumi Cheese", "Souvla", "Kleftiko"]
+  },
+  "Democratic Republic of the Congo": {
+    "regions": ["Kinshasa", "Lubumbashi", "Mbuji-Mayi", "Kisangani", "Goma"],
+    "rivers": ["Congo", "Kasai", "Lomami"],
+    "people": ["Patrice Lumumba", "Mobutu Sese Seko", "Dikembe Mutombo"],
+    "food": ["Poulet Moambe", "Fufu", "Chikwangue"]
+  },
+  "Dominican Republic": {
+    "regions": ["Santo Domingo", "Santiago", "La Romana", "San Pedro", "Puerto Plata"],
+    "rivers": ["Yaque del Norte", "Yuna", "Yaque del Sur"],
+    "people": ["Juan Luis Guerra", "David Ortiz", "Oscar de la Renta"],
+    "food": ["La Bandera Dominicana", "Mangú", "Sancocho"]
+  },
+  "El Salvador": {
+    "regions": ["San Salvador", "Santa Ana", "San Miguel", "Mejicanos", "Santa Tecla"],
+    "rivers": ["Lempa", "Grande de San Miguel", "Goascorán"],
+    "people": ["Oscar Romero", "Nayib Bukele", "Mágico González"],
+    "food": ["Pupusas", "Tamales de Elote", "Yuca Frita"]
+  },
+  "Ethiopia": {
+    "regions": ["Addis Ababa", "Gondar", "Mekele", "Awasa", "Bahir Dar"],
+    "rivers": ["Blue Nile", "Awash", "Omo"],
+    "people": ["Haile Selassie", "Abebe Bikila", "Tedros Adhanom"],
+    "food": ["Injera", "Doro Wat", "Kitfo"]
+  },
+  "Georgia": {
+    "regions": ["Tbilisi", "Kutaisi", "Batumi", "Rustavi", "Zugdidi"],
+    "rivers": ["Kura", "Rioni", "Enguri"],
+    "people": ["Joseph Stalin", "Shota Rustaveli", "Khvicha Kvaratskhelia"],
+    "food": ["Khachapuri", "Khinkali", "Satsivi"]
+  },
+  "Ghana": {
+    "regions": ["Accra", "Kumasi", "Tamale", "Takoradi", "Ashaiman"],
+    "rivers": ["Volta", "Pra", "Ankobra"],
+    "people": ["Kwame Nkrumah", "Kofi Annan", "Michael Essien"],
+    "food": ["Jollof Rice", "Fufu", "Banku", "Waakye"]
+  },
+  "Guatemala": {
+    "regions": ["Guatemala City", "Mixco", "Villa Nueva", "Quetzaltenango", "Escuintla"],
+    "rivers": ["Motagua", "Usumacinta", "Dulce"],
+    "people": ["Rigoberta Menchú", "Miguel Ángel Asturias", "Oscar Isaac"],
+    "food": ["Pepián", "Kak'ik", "Tamales"]
+  },
+  "Honduras": {
+    "regions": ["Tegucigalpa", "San Pedro Sula", "Choloma", "La Ceiba", "El Progreso"],
+    "rivers": ["Patuca", "Ulúa", "Choluteca"],
+    "people": ["Francisco Morazán", "Berta Cáceres", "Carlos Costly"],
+    "food": ["Baleadas", "Plato Típico", "Sopa de Caracol"]
+  },
+  "Iceland": {
+    "regions": ["Reykjavik", "Kopavogur", "Hafnarfjordur", "Akureyri", "Reykjanesbaer"],
+    "rivers": ["Þjórsá", "Jökulsá á Fjöllum", "Ölfusá"],
+    "people": ["Björk", "Halldór Laxness", "Gylfi Sigurðsson"],
+    "food": ["Hákarl", "Skyr", "Kjötsúpa"]
+  },
+  "Ivory Coast": {
+    "regions": ["Yamoussoukro", "Abidjan", "Bouake", "Daloa", "San-Pedro"],
+    "rivers": ["Bandama", "Cavally", "Sassandra"],
+    "people": ["Didier Drogba", "Félix Houphouët-Boigny", "Yaya Touré"],
+    "food": ["Garba", "Alloco", "Kedjenou"]
+  },
+  "Jamaica": {
+    "regions": ["Kingston", "New Kingston", "Spanish Town", "Portmore", "Montego Bay"],
+    "rivers": ["Black River", "Rio Grande", "Martha Brae"],
+    "people": ["Bob Marley", "Usain Bolt", "Marcus Garvey"],
+    "food": ["Ackee and Saltfish", "Jerk Chicken", "Curry Goat"]
+  },
+  "Jordan": {
+    "regions": ["Amman", "Zarqa", "Irbid", "Aqaba", "Jerash"],
+    "rivers": ["Jordan", "Yarmouk", "Zarqa"],
+    "people": ["King Abdullah II", "Queen Rania", "Zarkawi"],
+    "food": ["Mansaf", "Falafel", "Hummus"]
+  },
+  "Kenya": {
+    "regions": ["Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret"],
+    "rivers": ["Tana", "Athi-Galana", "Ewaso Ng'iro"],
+    "people": ["Jomo Kenyatta", "Eliud Kipchoge", "Lupita Nyong'o"],
+    "food": ["Ugali", "Sukuma Wiki", "Nyama Choma"]
+  },
+  "Kuwait": {
+    "regions": ["Kuwait City", "Dasman", "Sharq", "Mirgab", "Jibla"],
+    "rivers": ["None (No permanent rivers)"],
+    "people": ["Sheikh Sabah Al-Ahmad", "Tareq Al-Suwaidan", "Bader Al-Mutawa"],
+    "food": ["Machboos", "Mutabbaq Samak", "Gabout"]
+  },
+  "Latvia": {
+    "regions": ["Riga", "Daugavpils", "Liepaja", "Jelgava", "Jurmala"],
+    "rivers": ["Daugava", "Gauja", "Venta"],
+    "people": ["Kristaps Porziņģis", "Mikhail Baryshnikov", "Vaira Vīķe-Freiberga"],
+    "food": ["Grey Peas with Speck", "Rye Bread Soup", "Sklandrausis"]
+  },
+  "Lebanon": {
+    "regions": ["Beirut", "Tripoli", "Sidon", "Tyre", "Byblos"],
+    "rivers": ["Litani", "Orontes", "Hasbani"],
+    "people": ["Kahlil Gibran", "Fairuz", "Nancy Ajram"],
+    "food": ["Tabbouleh", "Kibbeh", "Hummus", "Shawarma"]
+  },
+  "Libya": {
+    "regions": ["Tripoli", "Benghazi", "Misrata", "Tarhuna", "Al Khums"],
+    "rivers": ["None (Seasonal Wadis)"],
+    "people": ["Muammar Gaddafi", "Omar Mukhtar", "Idris I"],
+    "food": ["Couscous", "Bazeen", "Asida"]
+  },
+  "Lithuania": {
+    "regions": ["Vilnius", "Kaunas", "Klaipeda", "Siauliai", "Panevezys"],
+    "rivers": ["Neman", "Neris", "Venta"],
+    "people": ["Arvydas Sabonis", "Jonas Mekas", "Dalia Grybauskaitė"],
+    "food": ["Cepelinai", "Šaltibarščiai", "Kugelis"]
+  },
+  "Luxembourg": {
+    "regions": ["Luxembourg City", "Esch-sur-Alzette", "Differdange", "Dudelange", "Ettelbruck"],
+    "rivers": ["Moselle", "Sûre", "Alzette"],
+    "people": ["Grand Duke Henri", "Jean-Claude Juncker", "Andy Schleck"],
+    "food": ["Judd mat Gaardebounen", "Bouneschlupp", "Gromperekichelcher"]
+  },
+  "Madagascar": {
+    "regions": ["Antananarivo", "Toamasina", "Antsirabe", "Mahajanga", "Fianarantsoa"],
+    "rivers": ["Betsiboka", "Mangoky", "Tsiribihina"],
+    "people": ["King Andrianampoinimerina", "Gisèle Rabesahala", "Bababa"],
+    "food": ["Romazava", "Ravitoto", "Vary Amin'anana"]
+  },
+  "Mali": {
+    "regions": ["Bamako", "Sikasso", "Mopti", "Koutiala", "Kayes"],
+    "rivers": ["Niger", "Senegal"],
+    "people": ["Mansa Musa", "Salif Keita", "Amadou Toumani Touré"],
+    "food": ["Tigadege Na", "To", "Fufu"]
+  },
+  "Malta": {
+    "regions": ["Valletta", "Birkirkara", "Qormi", "Sliema", "Mosta"],
+    "rivers": ["None (No rivers)"],
+    "people": ["Dom Mintoff", "Joseph Calleja", "Roberta Metsola"],
+    "food": ["Pastizzi", "Fenkata (Rabbit Stew)", "Timpana"]
+  },
+  "Moldova": {
+    "regions": ["Chisinau", "Balti", "Tiraspol", "Bender", "Kahul"],
+    "rivers": ["Dniester", "Prut", "Răut"],
+    "people": ["Stephen the Great", "Maia Sandu", "Dan Balan"],
+    "food": ["Mămăligă", "Plăcinte", "Sarmale"]
+  },
+  "Montenegro": {
+    "regions": ["Podgorica", "Niksic", "Pljevlja", "Bijelo Polje", "Cetinje"],
+    "rivers": ["Tara", "Moraca", "Lim"],
+    "people": ["Petar II Petrović-Njegoš", "Stevan Jovetić", "Milo Đukanović"],
+    "food": ["Kastradina", "Brav u Mlijeku", "Njegoški Pršut"]
+  },
+  "Morocco": {
+    "regions": ["Rabat", "Casablanca", "Marrakesh", "Fes", "Tangier"],
+    "rivers": ["Moulouya", "Sebou", "Oum Er-Rbia"],
+    "people": ["Ibn Battuta", "King Mohammed VI", "Achraf Hakimi"],
+    "food": ["Couscous", "Tagine", "Pastilla"]
+  },
+  "Mozambique": {
+    "regions": ["Maputo", "Matola", "Beira", "Nampula", "Chimoio"],
+    "rivers": ["Zambezi", "Limpopo"],
+    "people": ["Samora Machel", "Eusébio", "Maria Mutola"],
+    "food": ["Frango à Zambeziana", "Matapa", "Piri-Piri Chicken"]
+  },
+  "Nicaragua": {
+    "regions": ["Managua", "Leon", "Masaya", "Matagalpa", "Chinandega"],
+    "rivers": ["Coco", "San Juan", "Grande de Matagalpa"],
+    "people": ["Rubén Darío", "Augusto César Sandino", "Daniel Ortega"],
+    "food": ["Gallo Pinto", "Nacatamal", "Vigorón"]
+  },
+  "Niger": {
+    "regions": ["Niamey", "Zinder", "Maradi", "Tahoua", "Agadez"],
+    "rivers": ["Niger"],
+    "people": ["Hamani Diori", "Mahamadou Issoufou", "Moussa Maâzou"],
+    "food": ["Djerma Stew", "Millet Porridge", "Kilishi"]
+  },
+  "Nigeria": {
+    "regions": ["Abuja", "Lagos", "Kano", "Ibadan", "Kaduna"],
+    "rivers": ["Niger", "Benue", "Cross River"],
+    "people": ["Chinua Achebe", "Wole Soyinka", "Burna Boy"],
+    "food": ["Jollof Rice", "Pounded Yam and Egusi Soup", "Suya"]
+  },
+  "North Macedonia": {
+    "regions": ["Skopje", "Bitola", "Kumanovo", "Prilep", "Tetovo"],
+    "rivers": ["Vardar", "Black Drin", "Bregalnica"],
+    "people": ["Mother Teresa", "Gorce Petrov", "Goran Pandev"],
+    "food": ["Tavče Gravče", "Ajvar", "Pastrmajlija"]
+  },
+  "Oman": {
+    "regions": ["Muscat", "Salalah", "Seeb", "Sohar", "Nizwa"],
+    "rivers": ["None (Wadis like Wadi Bani Khalid)"],
+    "people": ["Sultan Qaboos", "Sultan Haitham", "Ali Al-Habsi"],
+    "food": ["Shuwa", "Omani Halwa", "Mashuai"]
+  },
+  "Panama": {
+    "regions": ["Panama City", "San Miguelito", "Tocumen", "David", "Colon"],
+    "rivers": ["Chagres", "Tuira", "Chepo"],
+    "people": ["Omar Torrijos", "Roberto Durán", "Mariano Rivera"],
+    "food": ["Sancocho", "Ropa Vieja", "Carimañolas"]
+  },
+  "Philippines": {
+    "regions": ["Manila", "Quezon City", "Davao City", "Cebu City", "Zamboanga"],
+    "rivers": ["Cagayan", "Rio Grande de Mindanao", "Pasig"],
+    "people": ["Jose Rizal", "Manny Pacquiao", "Rodrigo Duterte"],
+    "food": ["Adobo", "Sinigang", "Lechon", "Halo-Halo"]
+  },
+  "Qatar": {
+    "regions": ["Doha", "Al Rayyan", "Al Wakrah", "Al Khor", "Umm Salal"],
+    "rivers": ["None (No rivers)"],
+    "people": ["Sheikh Tamim bin Hamad", "Mutaz Essa Barshim", "Nasser Al-Attiyah"],
+    "food": ["Machboos", "Harees", "Luqaimat"]
+  },
+  "Singapore": {
+    "regions": ["Central Region", "East Region", "North Region", "North-East Region", "West Region"],
+    "rivers": ["Singapore River", "Kallang River", "Rochor River"],
+    "people": ["Lee Kuan Yew", "Lee Hsien Loong", "Joseph Schooling"],
+    "food": ["Hainanese Chicken Rice", "Chilli Crab", "Laksa"]
+  },
+  "Slovakia": {
+    "regions": ["Bratislava", "Kosice", "Presov", "Zilina", "Nitra"],
+    "rivers": ["Danube", "Váh", "Hron"],
+    "people": ["Alexander Dubček", "Peter Sagan", "Andy Warhol (Roots)"],
+    "food": ["Bryndzové Halušky", "Kapustnica", "Zemiakové Placky"]
+  },
+  "Slovenia": {
+    "regions": ["Ljubljana", "Maribor", "Celje", "Kranj", "Velenje"],
+    "rivers": ["Sava", "Drava", "Soča"],
+    "people": ["Slavoj Žižek", "Melania Trump", "Luka Dončić"],
+    "food": ["Kranjska Klobasa", "Potica", "Prekmurska Gibanica"]
+  },
+  "Somalia": {
+    "regions": ["Mogadishu", "Hargeisa", "Bosaso", "Galkayo", "Merca"],
+    "rivers": ["Jubba", "Shebelle"],
+    "people": ["Siad Barre", "Iman (Model)", "Mo Farah (Roots)"],
+    "food": ["Bariis Iskukaris", "Canjeero", "Suqaar"]
+  },
+  "Sri Lanka": {
+    "regions": ["Colombo", "Kandy", "Galle", "Jaffna", "Negombo"],
+    "rivers": ["Mahaweli", "Malvathu", "Kala Oya"],
+    "people": ["Sirimavo Bandaranaike", "Kumar Sangakkara", "Arthur C. Clarke (Resident)"],
+    "food": ["Rice and Curry", "Kottu Roti", "Hoppers"]
+  },
+  "Sudan": {
+    "regions": ["Khartoum", "Omdurman", "Khartoum North", "Port Sudan", "Nyala"],
+    "rivers": ["Nile", "White Nile", "Blue Nile"],
+    "people": ["Omar al-Bashir", "Gaafar Nimeiry", "Tayeb Salih"],
+    "food": ["Ful Medames", "Kisra", "Gurasa"]
+  },
+  "Syria": {
+    "regions": ["Damascus", "Aleppo", "Homs", "Latakia", "Hama"],
+    "rivers": ["Euphrates", "Orontes", "Khabur"],
+    "people": ["Bashar al-Assad", "Nizar Qabbani", "Adonis"],
+    "food": ["Shawarma", "Hummus", "Kibbeh", "Fattoush"]
+  },
+  "Tanzania": {
+    "regions": ["Dodoma", "Dar es Salaam", "Mwanza", "Arusha", "Mbeya"],
+    "rivers": ["Rufiji", "Pangani", "Ruvuma"],
+    "people": ["Julius Nyerere", "Samia Suluhu Hassan", "Diamond Platnumz"],
+    "food": ["Ugali", "Nyama Choma", "Pilau", "Chips Mayai"]
+  },
+  "Tunisia": {
+    "regions": ["Tunis", "Sfax", "Sousse", "Kairouan", "Bizerte"],
+    "rivers": ["Medjerda"],
+    "people": ["Habib Bourguiba", "Zine El Abidine Ben Ali", "Oussama Mellouli"],
+    "food": ["Couscous", "Brik", "Lablabi", "Ojja"]
+  },
+  "Uganda": {
+    "regions": ["Kampala", "Nansana", "Kira", "Mbarara", "Mukono"],
+    "rivers": ["White Nile", "Katonga", "Kagera"],
+    "people": ["Idi Amin", "Yoweri Museveni", "Joshua Cheptegei"],
+    "food": ["Matooke", "Luwombo", "Rolex (Egg Roll)"]
+  },
+  "United Arab Emirates": {
+    "regions": ["Abu Dhabi", "Dubai", "Sharjah", "Ajman", "Al Ain"],
+    "rivers": ["None (Wadis only)"],
+    "people": ["Sheikh Zayed", "Sheikh Mohammed bin Rashid", "Hazzza Al Mansouri"],
+    "food": ["Harees", "Machboos", "Luqaimat"]
+  },
+  "Yemen": {
+    "regions": ["Sanaa", "Aden", "Taiz", "Al Hudaydah", "Mukalla"],
+    "rivers": ["Wadi Hadramaut"],
+    "people": ["Ali Abdullah Saleh", "Tawakel Karman", "Ali Al-Habsi"],
+    "food": ["Saltah", "Mandi", "Kabsa", "Bint Al-Sahn"]
+  },
+  "Zambia": {
+    "regions": ["Lusaka", "Kitwe", "Ndola", "Kabwe", "Chingola"],
+    "rivers": ["Zambezi", "Kafue", "Luangwa"],
+    "people": ["Kenneth Kaunda", "Levy Mwanawasa", "Patson Daka"],
+    "food": ["Nshima", "Ifisashi", "Chikanda"]
+  },
+  "Zimbabwe": {
+    "regions": ["Harare", "Bulawayo", "Chitungwiza", "Mutare", "Gweru"],
+    "rivers": ["Zambezi", "Limpopo", "Sanyati"],
+    "people": ["Robert Mugabe", "Emmerson Mnangagwa", "Kirsty Coventry"],
+    "food": ["Sadza", "Muriwo", "Nyamachoma"]
+  },
+  "Dem. Rep. Congo": {
+    "regions": ["Kinshasa", "Lubumbashi", "Mbuji-Mayi", "Kisangani", "Goma"],
+    "rivers": ["Congo", "Kasai", "Ubangi"],
+    "people": ["Patrice Lumumba", "Mobutu Sese Seko", "Laurent Kabila"],
+    "food": ["Poulet Moambe", "Fufu", "Kwanga"]
+  },
+  "Greenland": {
+    "regions": ["Nuuk", "Sisimiut", "Ilulissat", "Qaqortoq", "Aasiaat"],
+    "rivers": ["Watson River"],
+    "people": ["Hans Egede", "Jonathan Motzfeldt", "Kim Kielsen"],
+    "food": ["Suaasat", "Mattak", "Dried Cod"]
+  },
+  "Belize": {
+    "regions": ["Belmopan", "Belize City", "San Ignacio", "Orange Walk", "Dangriga"],
+    "rivers": ["Belize River", "Macal", "Hondo"],
+    "people": ["George Cadle Price", "Dean Barrow", "Johnny Briceño"],
+    "food": ["Rice and Beans", "Boil Up", "Fry Jacks"]
+  },
+  "Benin": {
+    "regions": ["Porto-Novo", "Cotonou", "Parakou", "Djougou", "Bohicon"],
+    "rivers": ["Oueme", "Mono", "Niger"],
+    "people": ["Mathieu Kérékou", "Patrice Talon", "Angélique Kidjo"],
+    "food": ["Kumi", "Amo", "Fufu", "Wagasi Cheese"]
+  },
+  "Togo": {
+    "regions": ["Lome", "Sokode", "Kara", "Atakpame", "Kpalime"],
+    "rivers": ["Mono", "Oti"],
+    "people": ["Gnassingbé Eyadéma", "Faure Gnassingbé", "Emmanuel Adebayor"],
+    "food": ["Fufu", "Pate", "Djenkoume"]
+  },
+  "Botswana": {
+    "regions": ["Gaborone", "Francistown", "Molepolole", "Maun", "Serowe"],
+    "rivers": ["Okavango", "Limpopo", "Chobe"],
+    "people": ["Seretse Khama", "Festus Mogae", "Amantle Montsho"],
+    "food": ["Seswaa", "Bogobe", "Dikgobe"]
+  },
+  "Central African Rep.": {
+    "regions": ["Bangui", "Bimbo", "Berberati", "Carnot", "Bambari"],
+    "rivers": ["Ubangi", "Sangha", "Chari"],
+    "people": ["Jean-Bédel Bokassa", "David Dacko", "Faustin Touadéra"],
+    "food": ["Kanda", "Chichinga", "Fufu"]
+  },
+  "Côte d'Ivoire": {
+    "regions": ["Yamoussoukro", "Abidjan", "Bouake", "Daloa", "San-Pedro"],
+    "rivers": ["Bandama", "Cavally", "Sassandra"],
+    "people": ["Didier Drogba", "Félix Houphouët-Boigny", "Alpha Blondy"],
+    "food": ["Garba", "Alloco", "Kedjenou"]
+  },
+  "Gabon": {
+    "regions": ["Libreville", "Port-Gentil", "Franceville", "Oyem", "Moanda"],
+    "rivers": ["Ogooué", "Ivindo", "Nyanga"],
+    "people": ["Omar Bongo", "Ali Bongo Ondimba", "Pierre-Emerick Aubameyang"],
+    "food": ["Poulet Nyembwe", "Fufu", "Manioc"]
+  },
+  "Liberia": {
+    "regions": ["Monrovia", "Gbarnga", "Kakata", "Bensonville", "Harper"],
+    "rivers": ["Cavalla", "St. Paul", "St. John"],
+    "people": ["George Weah", "Ellen Johnson Sirleaf", "Charles Taylor"],
+    "food": ["Dumboy", "Palava Sauce", "Jollof Rice"]
+  },
+  "Namibia": {
+    "regions": ["Windhoek", "Walvis Bay", "Swakopmund", "Henties Bay", "Oshakati"],
+    "rivers": ["Orange", "Fish River", "Okavango"],
+    "people": ["Sam Nujoma", "Hage Geingob", "Frankie Fredericks"],
+    "food": ["Kapana", "Potjiekos", "Biltong"]
+  },
+  "Andorra": {
+    "regions": ["Andorra la Vella", "Escaldes-Engordany", "Encamp", "Sant Julia de Loria", "La Massana"],
+    "rivers": ["Gran Valira", "Valira d'Orient"],
+    "people": ["Albert Pintat", "Xavier Espot Zamora", "Joan Enric Vives"],
+    "food": ["Escudella", "Trinxat", "Cargols a la Llauna"]
+  },
+  "Antigua and Barbuda": {
+    "regions": ["St. John's", "All Saints", "Liberta", "Potters Village", "Bolans"],
+    "rivers": ["None (No rivers)"],
+    "people": ["Sir Vere Bird", "Gaston Browne", "Sir Vivian Richards"],
+    "food": ["Fungee and Pepperpot", "Ducana", "Saltfish"]
+  },
+  "Barbados": {
+    "regions": ["Bridgewater", "Speightstown", "Oistins", "Bathsheba", "Holetown"],
+    "rivers": ["Constitution River"],
+    "people": ["Rihanna", "Sir Garfield Sobers", "Mia Mottley"],
+    "food": ["Cou-Cou and Flying Fish", "Macaroni Pie", "Fish Cakes"]
+  },
+  "Bhutan": {
+    "regions": ["Thimphu", "Phuntsholing", "Paro", "Gelephu", "Punakha"],
+    "rivers": ["Manas", "Sankosh", "Wang Chhu"],
+    "people": ["Jigme Khesar Namgyel Wangchuck", "Tshering Tobgay", "Dzongsar Khyentse Rinpoche"],
+    "food": ["Ema Datshi", "Momo", "Phaksha Paa"]
+  },
+  "Bosnia and Herzegovina": {
+    "regions": ["Sarajevo", "Banja Luka", "Tuzla", "Zenica", "Mostar"],
+    "rivers": ["Neretva", "Miljacka", "Bosna"],
+    "people": ["Alija Izetbegović", "Edin Džeko", "Ivo Andrić"],
+    "food": ["Ćevapi", "Burek", "Begova Čorba"]
+  },
+  "Brunei": {
+    "regions": ["Bandar Seri Begawan", "Kuala Belait", "Seria", "Tutong", "Bangar"],
+    "rivers": ["Belait", "Tutong", "Brunei River"],
+    "people": ["Sultan Hassanal Bolkiah", "Prince Azim", "Wu Chun"],
+    "food": ["Ambuyat", "Nasi Katok", "Kelupis"]
+  },
+  "Burkina Faso": {
+    "regions": ["Ouagadougou", "Bobo-Dioulasso", "Koudougou", "Ouahigouya", "Banfora"],
+    "rivers": ["Volta", "Mouhoun", "Nazinon"],
+    "people": ["Thomas Sankara", "Blaise Compaoré", "Ibrahim Traoré"],
+    "food": ["Riz Gras", "Tô", "Brochettes"]
+  },
+  "Burundi": {
+    "regions": ["Gitega", "Bujumbura", "Muyinga", "Ngozi", "Rumonge"],
+    "rivers": ["Ruzizi", "Malagarasi", "Ruvubu"],
+    "people": ["Pierre Nkurunziza", "Évariste Ndayishimiye", "Michel Micombero"],
+    "food": ["Boko Boko Chicken", "Mukeke Fish", "Fufu"]
+  },
+  "Cabo Verde": {
+    "regions": ["Praia", "Mindelo", "Santa Maria", "Assomada", "Porto Novo"],
+    "rivers": ["None (Intermittent streams only)"],
+    "people": ["Cesária Évora", "Amílcar Cabral", "Jorge Carlos Fonseca"],
+    "food": ["Cachupa", "Pastel com Diabo Dentro", "Bacalhau"]
+  },
+  "Cambodia": {
+    "regions": ["Phnom Penh", "Siem Reap", "Battambang", "Sihanoukville", "Poipet"],
+    "rivers": ["Mekong", "Tonle Sap", "Bassac"],
+    "people": ["Norodom Sihanouk", "Hun Sen", "Pol Pot"],
+    "food": ["Fish Amok", "Bai Sach Chrouk", "Nom Banh Chok"]
+  },
+  "Comoros": {
+    "regions": ["Moroni", "Mutsamudu", "Fomboni", "Domoni", "Mirontsi"],
+    "rivers": ["None (No permanent rivers)"],
+    "people": ["Azali Assoumani", "Ahmed Abdallah", "Said Mohamed Cheikh"],
+    "food": ["Langouste a la Vanille", "M'tsolola", "Pilao"]
+  },
+  "Djibouti": {
+    "regions": ["Djibouti City", "Ali Sabieh", "Tadjoura", "Dikhil", "Obock"],
+    "rivers": ["Sadai (Seasonal)"],
+    "people": ["Ismail Omar Guelleh", "Hassan Gouled Aptidon", "Ayanleh Souleiman"],
+    "food": ["Skoudehkaris", "Fah-Fah", "Lohoh"]
+  },
+  "Dominica": {
+    "regions": ["Roseau", "Portsmouth", "Marigot", "Berekua", "Mahaut"],
+    "rivers": ["Layou", "Pagua", "Roseau River"],
+    "people": ["Jean Rhys", "Roosevelt Skerrit", "Dame Eugenia Charles"],
+    "food": ["Mountain Chicken (Frog leg)", "Callaloo", "Sancocho"]
+  },
+  "Equatorial Guinea": {
+    "regions": ["Malabo", "Bata", "Ebebiyin", "Oyala", "Mongomo"],
+    "rivers": ["Benito", "Muni"],
+    "people": ["Teodoro Obiang Nguema Mbasogo", "Francisco Macías Nguema", "Alvaro Alvaro"],
+    "food": ["Succotash", "Chicken with Peanut Sauce", "Fufu"]
+  },
+  "Eritrea": {
+    "regions": ["Asmara", "Keren", "Massawa", "Assab", "Mendefera"],
+    "rivers": ["Anseba", "Barka", "Mareb"],
+    "people": ["Isaias Afwerki", "Zersenay Tadese", "Tiffany Haddish (Roots)"],
+    "food": ["Zigni with Injera", "Kitcha Fit-Fit", "Shiro"]
+  },
+  "Fiji": {
+    "regions": ["Suva", "Lautoka", "Nadi", "Labasa", "Ba"],
+    "rivers": ["Rewa", "Sigatoka", "Navua"],
+    "people": ["Frank Bainimarama", "Vijay Singh", "Waisale Serevi"],
+    "food": ["Kokoda", "Lovo", "Cassava Halwa"]
+  },
+  "Guyana": {
+    "regions": ["Georgetown", "Linden", "New Amsterdam", "Anna Regina", "Bartica"],
+    "rivers": ["Essequibo", "Demerara", "Berbice"],
+    "people": ["Cheddi Jagan", "Forbes Burnham", "Irfaan Ali"],
+    "food": ["Pepperpot", "Roti and Curry", "Metemgee"]
+  },
+  "Haiti": {
+    "regions": ["Port-au-Prince", "Carrefour", "Delmas", "Cap-Haitien", "Gonaives"],
+    "rivers": ["Artibonite", "Les Trois Rivières"],
+    "people": ["Toussaint Louverture", "Jean-Jacques Dessalines", "Wyclef Jean"],
+    "food": ["Griot (Pork)", "Diri ak Djon Djon", "Soup Joumou"]
+  },
+  "Kirim": {
+    "regions": ["Simferopol", "Sevastopol", "Kerch", "Yevpatoria", "Yalta"],
+    "rivers": ["Salgir", "Alma", "Kacha"],
+    "people": ["Ismail Gaspirali", "Amet-khan Sultan", "Jamala"],
+    "food": ["Cheburek", "Yantikh", "Lagman", "Chuberek"]
+  },
+  "Kosovo": {
+    "regions": ["Pristina", "Prizren", "Gjilan", "Peja", "Mitrovica"],
+    "rivers": ["White Drin", "Sitnica", "Ibar"],
+    "people": ["Ibrahim Rugova", "Albin Kurti", "Rita Ora (Roots)", "Dua Lipa (Roots)"],
+    "food": ["Flija", "Tavë Prizreni", "Byrek"]
+  },
+  "Laos": {
+    "regions": ["Vientiane", "Pakse", "Savannakhet", "Luang Prabang", "Xam Neua"],
+    "rivers": ["Mekong", "Nam Ou", "Nam Khan"],
+    "people": ["Kaysone Phomvihane", "Choummaly Sayasone", "Thongloun Sisoulith"],
+    "food": ["Larb", "Sticky Rice", "Tam Mak Hoong (Papaya Salad)"]
+  },
+  "Lesotho": {
+    "regions": ["Maseru", "Teyateyaneng", "Mafeteng", "Hlotse", "Mohale's Hoek"],
+    "rivers": ["Orange (Senqu)", "Caledon"],
+    "people": ["King Moshoeshoe I", "King Letsie III", "Sam Matekane"],
+    "food": ["Papa", "Moroho", "Chakalaka"]
+  },
+  "Liechtenstein": {
+    "regions": ["Vaduz", "Schaan", "Triesen", "Balzers", "Eschen"],
+    "rivers": ["Rhine", "Samina"],
+    "people": ["Prince Hans-Adam II", "Adrian Hasler", "Tina Weirather"],
+    "food": ["Käsknöpfle", "Ribel", "Torkarebl"]
+  },
+  "Malawi": {
+    "regions": ["Lilongwe", "Blantyre", "Mzuzu", "Zomba", "Kasungu"],
+    "rivers": ["Shire", "Linthipe", "Ruo"],
+    "people": ["Hastings Banda", "Bingu wa Mutharika", "Lazarus Chakwera"],
+    "food": ["Nsima", "Chambo Fish", "Kachumbari"]
+  },
+  "Maldives": {
+    "regions": ["Male", "Addu City", "Fuvahmulah", "Kulhudhuffushi", "Thinadhoo"],
+    "rivers": ["None (No rivers)"],
+    "people": ["Maumoon Abdul Gayoom", "Mohamed Nasheed", "Mohamed Muizzu"],
+    "food": ["Garudhiya", "Mas Huni", "Bajiya"]
+  },
+  "Mauritania": {
+    "regions": ["Nouakchott", "Nouadhibou", "Nema", "Kaedi", "Zouerat"],
+    "rivers": ["Senegal"],
+    "people": ["Moktar Ould Daddah", "Mohamed Ould Ghazouani", "Ely Ould Mohamed Vall"],
+    "food": ["Thieboudienne", "Couscous", "Méchoui"]
+  },
+  "Mauritius": {
+    "regions": ["Port Louis", "Beau Bassin", "Vacoas", "Curepipe", "Quatre Bornes"],
+    "rivers": ["Grand River South East", "Black River"],
+    "people": ["Sir Seewoosagur Ramgoolam", "Anerood Jugnauth", "Pravind Jugnauth"],
+    "food": ["Dholl Puri", "Biryani", "Rougaille"]
+  },
+  "Micronesia": {
+    "regions": ["Palikir", "Weno", "Tol", "Kolonia", "Nett"],
+    "rivers": ["None (Small streams only)"],
+    "people": ["Tosiwo Nakayama", "Manny Mori", "Wesley Simina"],
+    "food": ["Ulu (Breadfruit)", "Sukuram", "Pound Pwalu"]
+  },
+  "Monaco": {
+    "regions": ["Monaco Ville", "Monte Carlo", "La Condamine", "Fontvieille", "Moneghetti"],
+    "rivers": ["None (Coastal coastal area)"],
+    "people": ["Prince Albert II", "Grace Kelly", "Charles Leclerc"],
+    "food": ["Barbagiuan", "Stocafi", "Socca"]
+  },
+  "Myanmar": {
+    "regions": ["Naypyidaw", "Yangon", "Mandalay", "Mawlamyine", "Taunggyi"],
+    "rivers": ["Irrawaddy", "Salween", "Chindwin"],
+    "people": ["Aung San Suu Kyi", "U Thant", "General Ne Win"],
+    "food": ["Mohinga", "Lahpet Thoke (Tea leaf salad)", "Shan Noodles"]
+  },
+  "Nauru": {
+    "regions": ["Yaren", "Denigomodu", "Meneng", "Aiwo", "Boe"],
+    "rivers": ["None (No rivers)"],
+    "people": ["Hammer DeRoburt", "Baron Waqa", "David Adeang"],
+    "food": ["Coconut Crabs", "Fried Fish with Pandanus", "Spam dishes"]
+  },
+  "Nepal": {
+    "regions": ["Kathmandu", "Pokhara", "Lalitpur", "Bharatpur", "Biratnagar"],
+    "rivers": ["Kosi", "Gandaki", "Karnali"],
+    "people": ["Gautama Buddha (Born here)", "Tenzing Norgay", "Prithvi Narayan Shah"],
+    "food": ["Dal Bhat", "Momo", "Sel Roti"]
+  },
+  "North Korea": {
+    "regions": ["Pyongyang", "Hamhung", "Chongjin", "Nampo", "Wonsan"],
+    "rivers": ["Yalu", "Tumen", "Taedong"],
+    "people": ["Kim Il Sung", "Kim Jong Il", "Kim Jong Un"],
+    "food": ["Naengmyeon (Cold Noodles)", "Kimchi", "Injo Gogi Bap"]
+  },
+  "Palestine": {
+    "regions": ["Jerusalem", "Gaza City", "Ramallah", "Hebron", "Nablus"],
+    "rivers": ["Jordan"],
+    "people": ["Yasser Arafat", "Mahmoud Abbas", "Mahmoud Darwish"],
+    "food": ["Maqluba", "Musakhan", "Kanafeh"]
+  },
+  "Papua New Guinea": {
+    "regions": ["Port Moresby", "Lae", "Arawa", "Mount Hagen", "Madang"],
+    "rivers": ["Sepik", "Fly", "Purari"],
+    "people": ["Michael Somare", "James Marape", "Ryan Pini"],
+    "food": ["Mumu", "Saksak", "Kau Kau"]
+  },
+  "Rwanda": {
+    "regions": ["Kigali", "Butare", "Gisenyi", "Gitarama", "Ruhengeri"],
+    "rivers": ["Kagera", "Nyabarongo", "Ruzizi"],
+    "people": ["Paul Kagame", "Juvénal Habyarimana", "Agathe Uwilingiyimana"],
+    "food": ["Ubugali", "Isombe", "Brochettes"]
+  },
+  "Saint Kitts and Nevis": {
+    "regions": ["Basseterre", "Charlestown", "Sadlers", "Cayon", "Sandy Point"],
+    "rivers": ["Wingfield River", "Cayon River"],
+    "people": ["Robert L. Bradshaw", "Denzil Douglas", "Timothy Harris"],
+    "food": ["Goat Water", "Saltfish and Spicy Plantains", "Pelau"]
+  },
+  "Saint Lucia": {
+    "regions": ["Castries", "Gros Islet", "Vieux Fort", "Soufriere", "Dennery"],
+    "rivers": ["Roseau River", "Cul de Sac River"],
+    "people": ["Sir Arthur Lewis", "Derek Walcott", "Philip J. Pierre"],
+    "food": ["Green Figs and Saltfish", "Bouyon", "Callaloo Soup"]
+  },
+  "Saint Vincent and the Grenadines": {
+    "regions": ["Kingstown", "Georgetown", "Byera", "Barrouallie", "Layou"],
+    "rivers": ["Colonarie River", "Wallilabou River"],
+    "people": ["Ralph Gonsalves", "Ebenezer Joshua", "Milton Cato"],
+    "food": ["Roasted Breadfruit and Fried Jackfish", "Callaloo Soup", "Arrowroot Flour"]
+  },
+  "Samoa": {
+    "regions": ["Apia", "Vaitele", "Faleasiu", "Vailele", "Leulumoega"],
+    "rivers": ["Vaisigano", "Fuluasou"],
+    "people": ["Malietoa Tanumafili II", "Fiame Naomi Mata'afa", "Tuilaepa Sailele Malielegaoi"],
+    "food": ["Oka l'a (Raw Fish)", "Sapoas", "Palusami"]
+  },
+  "San Marino": {
+    "regions": ["San Marino", "Serravalle", "Borgo Maggiore", "Domagnano", "Fiorentino"],
+    "rivers": ["San Marino River", "Ausa", "Marano"],
+    "people": ["Saint Marinus", "Alessandro Rossi", "Manuel Poggiali"],
+    "food": ["Torta Tre Monti", "Cacciatello", "Nidi di Rondine"]
+  },
+  "Sao Tome and Principe": {
+    "regions": ["Sao Tome", "Trindade", "Neves", "Santana", "San Antonio"],
+    "rivers": ["Iô Grande", "Abade"],
+    "people": ["Manuel Pinto da Costa", "Evaristo Carvalho", "Patrice Trovoada"],
+    "food": ["Calulu", "Arroz Doce", "Bobo de Camarao"]
+  },
+  "Seychelles": {
+    "regions": ["Victoria", "Anse Etoile", "Beau Vallon", "Anse Royale", "Cascade"],
+    "rivers": ["None (Small mountain streams)"],
+    "people": ["France-Albert René", "James Michel", "Wavel Ramkalawan"],
+    "food": ["Ladob", "Shark Chutney", "Grilled Fish Creole"]
+  },
+  "Solomon Islands": {
+    "regions": ["Honiara", "Gizo", "Auki", "Noro", "Kirakira"],
+    "rivers": ["Lunga", "Matanikau"],
+    "people": ["Peter Kenilorea", "Manasseh Sogavare", "Jeremiah Manele"],
+    "food": ["Poi", "Cassava Pudding", "Roasted Fish"]
+  },
+  "South Sudan": {
+    "regions": ["Juba", "Malakal", "Wau", "Yei", "Yambio"],
+    "rivers": ["White Nile", "Bahr el Ghazal", "Sobat"],
+    "people": ["John Garang", "Salva Kiir Mayardit", "Luol Deng"],
+    "food": ["Kisra", "Asida", "Kajaik (Fish Stew)"]
+  },
+  "Suriname": {
+    "regions": ["Paramaribo", "Lelydorp", "New Nickerie", "Moengo", "Nieuw Amsterdam"],
+    "rivers": ["Suriname", "Marowijne", "Coppename"],
+    "people": ["Desi Bouterse", "Chan Santokhi", "Anthony Nesty"],
+    "food": ["Pom", "Roti", "Moksi Alesi"]
+  },
+  "Eswatini": {
+    "regions": ["Mbabane", "Manzini", "Lobamba", "Big Bend", "Siteki"],
+    "rivers": ["Great Usutu", "Komati", "Mbuluzi"],
+    "people": ["King Sobhuza II", "King Mswati III", "Barnabas Sibusiso Dlamini"],
+    "food": ["Umncweba", "Sishwala", "Incwancwa"]
+  },
+  "Taiwan": {
+    "regions": ["Taipei", "Kaohsiung", "Taichung", "Tainan", "Hsinchu"],
+    "rivers": ["Zhuoshui", "Gaoping", "Tamsui"],
+    "people": ["Chiang Kai-shek", "Tsai Ing-wen", "Ang Lee"],
+    "food": ["Beef Noodles", "Bubble Tea", "Stinky Tofu", "Lu Rou Fan"]
+  },
+  "Timor-Leste": {
+    "regions": ["Dili", "Dare", "Baucau", "Maliana", "Suai"],
+    "rivers": ["Lois", "Lacló"],
+    "people": ["Xanana Gusmão", "José Ramos-Horta", "Carlos Filipe Ximenes Belo"],
+    "food": ["Batar Da'an", "Ikan Sabuko", "Caril"]
+  },
+  "Tonga": {
+    "regions": ["Nuku'alofa", "Mu'a", "Neiafu", "Haveluloto", "Vaini"],
+    "rivers": ["None (No rivers)"],
+    "people": ["King Tupou VI", "Sione Lauaki", "Valerie Adams (Roots)"],
+    "food": ["Lu Pulu", "'Otai", "'Ufi"]
+  },
+  "Trinidad and Tobago": {
+    "regions": ["Port of Spain", "Chaguanas", "San Fernando", "Arima", "Point Fortin"],
+    "rivers": ["Caroni", "Ortoire"],
+    "people": ["Eric Williams", "Nicki Minaj", "Brian Lara"],
+    "food": ["Doubles", "Roti", "Callaloo Soup"]
+  },
+  "Tuvalu": {
+    "regions": ["Funafuti", "Asau", "Lolua", "Savave", "Fangaua"],
+    "rivers": ["None (No rivers)"],
+    "people": ["Toaripi Lauti", "Kausea Natano", "Feleti Teo"],
+    "food": ["Pulaka", "Coconut Tuna", "Taro leaf stew"]
+  },
+  "Vanuatu": {
+    "regions": ["Port Vila", "Luganville", "Norsup", "Port Olry", "Isangel"],
+    "rivers": ["Sarakata", "Jourdain"],
+    "people": ["Walter Lini", "Kalkot Mataskelekele", "Charlot Salwai"],
+    "food": ["Lap Lap", "Tuluk", "Simboro"]
+  },
+  "Vatican City": {
+    "regions": ["Vatican City", "St. Peter's Square", "Vatican Gardens", "Sistine Chapel", "Apostolic Palace"],
+    "rivers": ["Tiber (Adjacent)"],
+    "people": ["Pope Francis", "Pope Benedict XVI", "Pope John Paul II"],
+    "food": ["Italian Cuisine (Pasta, Risotto)"]
+  },
+  "Western Sahara": {
+    "regions": ["El Aaiun", "Dakhla", "Smara", "Cape Bojador", "Lagouira"],
+    "rivers": ["Saguia el-Hamra"],
+    "people": ["El-Ouali Mustapha Sayed", "Brahim Ghali", "Aminatou Haidar"],
+    "food": ["Couscous", "Camel Meat Tajine", "Sahrawi Tea"]
+  },
+  "Lao PDR": {
+    "regions": ["Vientiane", "Pakse", "Savannakhet", "Luang Prabang", "Xam Neua"],
+    "rivers": ["Mekong", "Nam Ou", "Nam Ngum"],
+    "people": ["Kaysone Phomvihane", "Sisavang Vatthana", "Thongloun Sisoulith"],
+    "food": ["Larb", "Sticky Rice", "Tam Mak Hoong"]
+  },
+  "Falkland Is.": {
+    "regions": ["Stanley", "Camp", "Fox Bay", "Port Howard", "Goose Green"],
+    "rivers": ["Malo River", "San Carlos River"],
+    "people": ["Rex Hunt", "Sara Jones", "Louis Vernet"],
+    "food": ["Mutton Roast", "Upland Goose Pie", "Fish and Chips"]
+  },
+  "Antarctica": {
+    "regions": ["McMurdo Station", "Amundsen-Scott Station", "Palmer Station", "Ross Dependency", "Queen Maud Land"],
+    "rivers": ["Onyx River"],
+    "people": ["Roald Amundsen", "Robert Falcon Scott", "Ernest Shackleton"],
+    "food": ["Pemmican", "Dehydrated Rations", "Canned Stew"]
+  },
+  "Eq. Guinea": {
+    "regions": ["Bioko Norte", "Bioko Sur", "Centro Sur", "Kié-Ntem", "Litoral", "Wele-Nzas", "Annobón", "Djibloho"],
+    "rivers": ["Benito", "Muni"],
+    "people": ["Teodoro Obiang", "Francisco Macías Nguema", "Eric Moussambani"],
+    "food": ["Succotash", "Peanut Soup", "Fufu"]
+  },
+  "Vietnam": {
+    "regions": ["Hanoi", "Ho Chi Minh City", "Da Nang", "Hai Phong", "Can Tho", "An Giang", "Bac Giang", "Dong Nai", "Khanh Hoa", "Thanh Hoa"],
+    "rivers": ["Mekong", "Red River"],
+    "people": ["Ho Chi Minh", "Vo Nguyen Giap", "Nguyen Du"],
+    "food": ["Pho", "Banh Mi", "Bun Cha"]
+  },
+  "Solomon Is.": {
+    "regions": ["Central", "Choiseul", "Guadalcanal", "Isabel", "Makira-Ulawa", "Malaita", "Rennell and Bellona", "Temotu", "Western", "Honiara"],
+    "rivers": ["Lunga", "Matanikau"],
+    "people": ["Peter Kenilorea", "Manasseh Sogavare", "Gordon Darcy Lilo"],
+    "food": ["Poi", "Cassava Pudding", "Yam dishes"]
+  },
+  "New Caledonia": {
+    "regions": ["North Province", "South Province", "Loyalty Islands Province"],
+    "rivers": ["Diahot River"],
+    "people": ["Jean-Marie Tjibaou", "Christian Karembeu", "Sébastien Vahaamahina"],
+    "food": ["Bougna", "Civet de Roussette", "Venison Sausage"]
+  },
+  "Dem. Rep. Korea": {
+    "regions": ["Pyongyang", "North Pyongan", "South Pyongan", "Kangwon", "Ryanggang"],
+    "rivers": ["Yalu", "Tumen", "Taedong"],
+    "people": ["Kim Il Sung", "Kim Jong Il", "Kim Jong Un"],
+    "food": ["Naengmyeon", "Kimchi", "Injo Gogi Bap"]
+  },
+  "Korea": {
+    "regions": ["Seoul", "Gyeonggi", "Busan", "Daegu", "Jeju"],
+    "rivers": ["Han", "Nakdong", "Geum"],
+    "people": ["King Sejong", "Son Heung-min", "Bong Joon-ho"],
+    "food": ["Kimchi", "Korean BBQ", "Bibimbap"]
+  },
+  "Somaliland": {
+    "regions": ["Hargeisa", "Berbera", "Burao", "Borama", "Erigavo"],
+    "rivers": ["None (Seasonal Wadis only)"],
+    "people": ["Abdirahman Ahmed Ali Tuur", "Muhammad Haji Ibrahim Egal", "Muse Bihi Abdi"],
+    "food": ["Bariis Iskukaris", "Lahooh", "Suqaar"]
+  }
+}
         // Dunyo chegaralarini yuklash (GeoJSON)
         fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
             .then(res => res.json())
