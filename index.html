@@ -3,110 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World map</title>
-    
-    <!-- Leaflet CSS - Xarita kutubxonasi -->
+    <title>Interaktiv Siyosiy Xarita</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
-            background: #05070a;
-            color: white;
-            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
+            background-color: #0b0f19;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         #map {
-            height: 100vh;
-            width: 100vw;
-            background: #05070a;
+            width: 100%;
+            height: 100%;
+            background: #0b0f19;
+        }
+        
+        /* 🔥 YANGI: Qidiruv tizimi paneli (Ekranning tepasida qoq o'rtada) */
+        #searchContainer {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%); /* O'rtaga tekislash */
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.85);
+            padding: 6px;
+            border-radius: 50px; /* Yumaloq zamonaviy shakl */
+            border: 1px solid rgba(56, 189, 248, 0.3); /* Nimjon ko'k chegara */
+            backdrop-filter: blur(10px); /* Orqa fonni xira qilish effekti */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 
+                        0 0 15px rgba(56, 189, 248, 0.1); /* Neonli nur */
+            transition: all 0.3s ease;
+        }
+        
+        #searchContainer:focus-within {
+            border-color: #38bdf8;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), 
+                        0 0 25px rgba(56, 189, 248, 0.3); /* Bosilganda kuchliroq neon nuri */
         }
 
-        /* Ma'lumot paneli - Neon uslubida */
-        .info-box {
+        #searchInput {
+            width: 280px;
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: #f8fafc;
+            font-size: 15px;
+            outline: none;
+        }
+        #searchInput::placeholder {
+            color: #64748b;
+        }
+
+        #searchBtn {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #38bdf8, #0284c7); /* Chiroyli gradient rang */
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+            transition: all 0.2s ease;
+        }
+        #searchBtn:hover {
+            transform: scale(1.03); /* Sichqoncha kelganda ozgina kattalashadi */
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.5);
+        }
+        #searchBtn:active {
+            transform: scale(0.98);
+        }
+
+        /* Ma'lumotlar paneli */
+        #infoBox {
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 300px;
+            width: 320px;
+            max-height: 85vh;
+            background: rgba(15, 23, 42, 0.95);
+            color: #f8fafc;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            border-left: 4px solid #00f2ff;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
             z-index: 1000;
-            display: none; /* Bosilmaguncha yashirin */
+            display: none;
+            overflow-y: auto;
         }
-
-        .info-box h2 {
-            margin: 0;
-            color: #00f2ff;
+        #countryName {
+            margin-top: 0;
+            color: #38bdf8;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+            font-size: 24px;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #fbbf24;
+            margin-top: 15px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            font-size: 22px;
-        }
-
-        .info-box p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #ccc;
-        }
-
-        .region-tag {
-            display: inline-block;
-            background: rgba(0, 242, 255, 0.1);
-            color: #00f2ff;
-            padding: 4px 10px;
-            margin: 3px;
-            border-radius: 5px;
             font-size: 12px;
-            border: 3px solid rgb(0, 238, 255);
+            letter-spacing: 1px;
         }
-
-        /* Xaritadagi davlatlar ustiga borganda effekt */
-        .leaflet-interactive:hover {
-            fill-opacity: 0.8;
-            stroke: #02e1ff;
-            stroke-width: 4;
-            cursor: crosshair;
+        .data-list {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 6px;
+            padding: 0 0 8px 0;
+            margin: 0 0 15px 0;
+            list-style: none;
+        }
+        .data-list::-webkit-scrollbar {
+            height: 4px;
+        }
+        .data-list::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+        .tag {
+            background: #1e293b;
+            border: 1px solid #475569;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
 
-    <div id="map"></div>
-
-    <div class="info-box" id="infoBox">
-        <h2 id="countryName">Davlat nomi</h2>
-        <hr style="border: 0.5px solid #333; margin: 15px 0;">
-        <p><strong>Viloyatlar/Hududlar:</strong></p>
-        <div id="regionsList"></div>
+    <div id="searchContainer">
+        <input type="text" id="searchInput" placeholder="Davlat nomini kiriting...">
+        <button id="searchBtn">Izlash</button>
     </div>
 
-    <!-- Leaflet JS -->
+    <div id="map"></div>
+
+    <div id="infoBox">
+        <h2 id="countryName">Davlat Nomi</h2>
+        
+        <div class="section-title">Viloyatlar / Shtatlar</div>
+        <ul id="regionsList" class="data-list"></ul>
+
+        <div class="section-title">Taniqli Insonlar</div>
+        <ul id="peopleList" class="data-list"></ul>
+
+        <div class="section-title">Daryolari</div>
+        <ul id="riversList" class="data-list"></ul>
+
+        <div class="section-title">Milliy Taomlari</div>
+        <ul id="foodList" class="data-list"></ul>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <script>
-        // Xaritani yaratish va takrorlanishini cheklash
-        const map = L.map('map', {
-            center: [20, 0],
-            zoom: 2,
-            minZoom: 2,
-            worldCopyJump: false, // Dunyo xaritasi takrorlanib sakrab ketmasligi uchun
-            maxBounds: [[-90, -180], [90, 180]]
-        });
+        const southWest = L.latLng(-85, -180);
+        const northEast = L.latLng(85, 180);
+        const bounds = L.latLngBounds(southWest, northEast);
 
-        // Siyosiy xarita qatlamini qo'shish (noWrap: true qo'shildi)
+        const map = L.map('map', {
+            zoomSnap: 0.5,
+            minZoom: 2,
+            maxZoom: 6,
+            maxBounds: bounds,
+            boundsViscosity: 1.0
+        }).setView([20, 0], 2);
+
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors',
-            noWrap: true // Xaritani gorizantaliga 4 marta takrorlanishini oldini oladi
+            attribution: '&copy; OpenStreetMap &copy; CARTO',
+            noWrap: true
         }).addTo(map);
 
-        // Ba'zi davlatlar ma'lumotlari
         const countryData = {
-          
-  "Afghanistan": {
+             "Afghanistan": {
     "regions": ["Kabul", "Kandahar", "Herat", "Balkh", "Nangarhar"],
     "rivers": ["Amu Darya", "Helmand", "Kabul"],
     "people": ["Ahmad Shah Durrani", "Malala Yousafzai", "Khaled Hosseini"],
@@ -1354,12 +1432,14 @@
     "people": ["Abdirahman Ahmed Ali Tuur", "Muhammad Haji Ibrahim Egal", "Muse Bihi Abdi"],
     "food": ["Bariis Iskukaris", "Lahooh", "Suqaar"]
   }
-        }
-        // Dunyo chegaralarini yuklash (GeoJSON)
+        };
+
+        let geoJsonLayer;
+
         fetch('https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson')
             .then(res => res.json())
             .then(data => {
-                L.geoJSON(data, {
+                geoJsonLayer = L.geoJSON(data, {
                     style: {
                         fillColor: '#1a2a3a',
                         weight: 1,
@@ -1370,42 +1450,97 @@
                     onEachFeature: function (feature, layer) {
                         layer.on('click', function (e) {
                             const name = feature.properties.name;
-                            showCountryInfo(name);
-                            
-                            // Ovozli aytish
-                            speak(name);
-
-                            // Xaritani o'sha davlatga yaqinlashtirish
-                            map.fitBounds(e.target.getBounds());
+                            selectCountry(name, layer);
                         });
                     }
                 }).addTo(map);
             });
 
-        function showCountryInfo(name) {
-            const box = document.getElementById('infoBox');
-            const nameEl = document.getElementById('countryName');
-            const listEl = document.getElementById('regionsList');
-
-            nameEl.innerText = name;
-            listEl.innerHTML = '';
-            box.style.display = 'block';
-
-            // Agar ma'lumot bo'lsa viloyatlarni chiqarish
-            const regions = countryData[name] || ["Ma'lumotlar bazada mavjud emas"];
-            
-            regions.forEach(r => {
-                const span = document.createElement('span');
-                span.className = 'region-tag';
-                span.innerText = r;
-                listEl.appendChild(span);
+        function selectCountry(name, layer) {
+            showCountryInfo(name);
+            speak(name);
+            map.fitBounds(layer.getBounds(), {
+                padding: [50, 50],
+                maxZoom: 5
             });
         }
 
+        function searchCountry() {
+            const value = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (!value) return;
+
+            let found = false;
+
+            geoJsonLayer.eachLayer(function (layer) {
+                const countryName = layer.feature.properties.name.toLowerCase();
+                
+                if (countryName === value || countryName.includes(value)) {
+                    const originalName = layer.feature.properties.name;
+                    selectCountry(originalName, layer);
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                alert("Davlat topilmadi! (Eslatma: Inglizcha yozing, masalan: Uzbekistan, Brazil)");
+            }
+        }
+
+        document.getElementById('searchBtn').addEventListener('click', searchCountry);
+
+        document.getElementById('searchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                searchCountry();
+            }
+        });
+
+        function showCountryInfo(name) {
+            const box = document.getElementById('infoBox');
+            document.getElementById('countryName').innerText = name;
+            
+            const lists = {
+                regions: document.getElementById('regionsList'),
+                people: document.getElementById('peopleList'),
+                rivers: document.getElementById('riversList'),
+                food: document.getElementById('foodList')
+            };
+            
+            Object.values(lists).forEach(list => list.innerHTML = '');
+            box.style.display = 'block';
+
+            const data = countryData[name];
+
+            if (data) {
+                createTags(data.regions, lists.regions);
+                createTags(data.people, lists.people);
+                createTags(data.rivers, lists.rivers);
+                createTags(data.food, lists.food);
+            } else {
+                Object.values(lists).forEach(list => {
+                    const li = document.createElement('li');
+                    li.className = 'tag';
+                    li.style.color = '#94a3b8';
+                    li.innerText = "Ma'lumot topilmadi";
+                    list.appendChild(li);
+                });
+            }
+        }
+
+        function createTags(array, targetElement) {
+            if(array && array.length > 0) {
+                array.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'tag';
+                    li.innerText = item;
+                    targetElement.appendChild(li);
+                });
+            }
+        }
+
         function speak(text) {
-            window.speechSynthesis.cancel(); // Avvalgi ovozni to'xtatish
+            window.speechSynthesis.cancel(); 
             const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'en-US'; // Ko'pchilik tizimda inglizcha aniq ishlaydi
+            msg.lang = 'en-US'; 
             msg.rate = 0.8;
             window.speechSynthesis.speak(msg);
         }
